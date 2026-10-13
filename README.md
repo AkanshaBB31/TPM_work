@@ -6,6 +6,8 @@ This is an open knowledge repository of frameworks, templates, playbooks and sma
 
 Everything is written from scratch using public industry standards (PMBOK, Scrum Guide, ITIL 4, Google SRE, DORA). All examples use a fictional company, **Example Co.**, and invented data.
 
+> 🌐 **Browse it as a website:** **https://akanshabb31.github.io/TPM_work/**. Every framework is rendered as a readable HTML page, plus an [interactive end-to-end case study](https://akanshabb31.github.io/TPM_work/case-study.html).
+
 ---
 
 ## Roles this portfolio supports
@@ -31,6 +33,7 @@ Everything is written from scratch using public industry standards (PMBOK, Scrum
 | 08 | [Automation](08-automation/) | Scheduled alerting pattern, AI-assisted PM workflows, tracker hygiene, **runnable SLO calculator** |
 | 09 | [Leadership](09-leadership/) | Escalation playbook, cross-functional collaboration |
 | 10 | [Interview Prep](10-interview-prep/) | TPM interview guide, STAR story bank |
+| 11 | [Case Study](11-case-study/) | **A fictional 26-week program applying every framework end to end**, with an [interactive web version](docs/case-study.html) |
 
 ## Skills matrix
 
@@ -65,6 +68,24 @@ python 08-automation/examples/slo_calculator.py 08-automation/examples/sample-de
 ```
 
 It needs Python 3.8+ and only the standard library.
+
+## Website
+
+The [`docs/`](docs/) folder is a static website built from this repository's markdown:
+
+| Page | What it is |
+|---|---|
+| `docs/index.html` | Portfolio home: skill areas, skills matrix, principles |
+| `docs/<area>/*.html` | Every framework and template rendered as an HTML page with navigation and a table of contents |
+| `docs/case-study.html` | The interactive case study (charts, timelines, KPI tiles) |
+
+**Rebuild after editing any markdown** (Python 3.8+, standard library only):
+
+```bash
+python scripts/build_site.py
+```
+
+**Publish:** GitHub → Settings → Pages → *Deploy from a branch* → `main` / `/docs`.
 
 ## How to use these templates
 

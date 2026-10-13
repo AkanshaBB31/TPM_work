@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAID Log Template · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html" aria-current="page"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../01-program-governance/index.html">Program Governance</a></div>
+    <article><h1 id="raid-log-template">RAID Log Template</h1>
+<p><strong>Skill:</strong> Program governance · <strong>Standard:</strong> PMBOK risk &amp; issue management</p>
+<p>A RAID log keeps <strong>R</strong>isks, <strong>A</strong>ssumptions, <strong>I</strong>ssues and <strong>D</strong>ependencies in one place, so nothing a delivery depends on stays implicit. Score risks with the <a href="risk-management-framework.html">risk management framework</a>.</p>
+<h2 id="definitions">Definitions</h2>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>It is…</th><th>Key question</th><th>Trigger to log</th></tr></thead><tbody><tr><td><strong>Risk</strong></td><td>An uncertain future event that would affect objectives</td><td>What <em>might</em> happen?</td><td>"This could…"</td></tr><tr><td><strong>Assumption</strong></td><td>Something treated as true without proof</td><td>What are we betting on?</td><td>"We're planning as if…"</td></tr><tr><td><strong>Issue</strong></td><td>A risk that has already happened</td><td>What's hurting us now?</td><td>"This <em>is</em> happening"</td></tr><tr><td><strong>Dependency</strong></td><td>Work owned by someone else that we need</td><td>Who are we waiting on?</td><td>"We can't finish until…"</td></tr></tbody></table></div>
+<h2 id="log">Log</h2>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Type</th><th>Description</th><th>Owner</th><th>P</th><th>I</th><th>Score</th><th>Response</th><th>Escalation trigger</th><th>Due</th><th>Status</th></tr></thead><tbody><tr><td>R-01</td><td>Risk</td><td>Because the payment vendor's sandbox is unstable, integration testing may stall, delaying UAT</td><td>QA lead</td><td>3</td><td>4</td><td>12</td><td><strong>Mitigate:</strong> build a contract stub; agree a sandbox SLA</td><td>Sandbox down &gt; 2 days</td><td>2026-05-10</td><td>Open</td></tr><tr><td>A-01</td><td>Assumption</td><td>Design system v3 components are ready before sprint 4</td><td>Design lead</td><td></td><td></td><td></td><td>Validate at sprint 3 review</td><td>Not confirmed by 04-20</td><td>2026-04-20</td><td>Validating</td></tr><tr><td>I-01</td><td>Issue</td><td>Staging data refresh failed; regression blocked for 2 teams</td><td>Platform lead</td><td></td><td>4</td><td></td><td>Manual reseed tonight; root cause by Friday</td><td></td><td>2026-04-15</td><td>In progress</td></tr><tr><td>D-01</td><td>Dependency</td><td>Identity team to ship SSO scopes API</td><td>Eng manager</td><td></td><td></td><td></td><td>Weekly sync; interface contract agreed</td><td>Not in staging by 05-01</td><td>2026-05-01</td><td>On track</td></tr></tbody></table></div>
+<p><em>All rows are fictional examples. Use roles, not names, in shared templates.</em></p>
+<h2 id="operating-rhythm">Operating rhythm</h2>
+<div class="table-wrap"><table><thead><tr><th>When</th><th>What</th></tr></thead><tbody><tr><td>Weekly</td><td>Owners update their items; the PM reviews everything scored ≥ 8</td></tr><tr><td>Fortnightly</td><td>Steering review of the top 5 risks and any overdue dependencies</td></tr><tr><td>Monthly</td><td>Summary to sponsors: new, closed, trending up</td></tr><tr><td>Close-out</td><td>Turn closed items into lessons learned</td></tr></tbody></table></div>
+<h2 id="hygiene-rules">Hygiene rules</h2>
+<ul><li>Every row has <strong>exactly one named owner</strong> and a <strong>date</strong>.</li><li>Write risks as <em>"Because of [cause], [event] may occur, leading to [effect]."</em></li><li>An assumption left unvalidated for more than 2 weeks becomes a risk. One that turns out false becomes an issue immediately.</li><li>A dependency without a committed date is a risk by default.</li><li>Close an issue only when its root cause is addressed. Keep closed rows, with their resolution, so you have history.</li></ul></article>
+    <div class="prevnext"><span></span><a href="risk-management-framework.html">risk management framework →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/raid-log-template.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#definitions">Definitions</a><a href="#log">Log</a><a href="#operating-rhythm">Operating rhythm</a><a href="#hygiene-rules">Hygiene rules</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

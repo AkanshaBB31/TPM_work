@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scheduled Alerting &amp; Reporting Pattern · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html" aria-current="page"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../08-automation/index.html">Automation</a></div>
+    <article><h1 id="scheduled-alerting-amp-reporting-pattern">Scheduled Alerting &amp; Reporting Pattern</h1>
+<p><strong>Skill:</strong> Workflow automation · <strong>Competency:</strong> Replacing manual status checks with reliable, low-noise automated signals</p>
+<p>A tool-agnostic design for unattended jobs that read an issue tracker, apply rules, and post results to a chat channel or a published page. Use it for SLO alerts, readiness reports, daily digests and new-item alerts.</p>
+<h2 id="1-architecture">1. Architecture</h2>
+<pre><code>┌───────────┐   ┌──────────┐   ┌──────────┐   ┌───────────┐   ┌──────────────┐
+│ Scheduler │──▶│  Fetch   │──▶│ Evaluate │──▶│  Render   │──▶│   Deliver    │
+│ (cron)    │   │ (API +   │   │ (rules + │   │ (markdown │   │ (webhook /   │
+│           │   │  query)  │   │  config) │   │  / HTML)  │   │  page)       │
+└───────────┘   └──────────┘   └──────────┘   └───────────┘   └──────────────┘
+                     ▲              ▲                               │
+                     └──── config.yaml (queries, thresholds) ───────┤
+                                                                    ▼
+                                                     state store (watermark / sent IDs)</code></pre>
+<h2 id="2-alert-archetypes">2. Alert archetypes</h2>
+<div class="table-wrap"><table><thead><tr><th>Archetype</th><th>Cadence</th><th>Content</th><th>Noise control</th></tr></thead><tbody><tr><td><strong>New-item alert</strong></td><td>Frequent (e.g. every 15 min)</td><td>Items created since the last run</td><td>Watermark; post nothing if empty</td></tr><tr><td><strong>Daily digest</strong></td><td>Once a day</td><td>Counts by priority × area</td><td>Always posts, so silence is never mistaken for "all clear"</td></tr><tr><td><strong>Approaching breach</strong></td><td>Once a day</td><td>Items in the warning window</td><td>Grouped by owner; once per item per day</td></tr><tr><td><strong>Breached</strong></td><td>Once a day</td><td>Items past target</td><td>Repeats daily until resolved</td></tr><tr><td><strong>Readiness report</strong></td><td>T-N / T-1 before a review</td><td>Gate results per item</td><td>Published page plus a summary post</td></tr></tbody></table></div>
+<h2 id="3-design-rules">3. Design rules</h2>
+<ol><li><strong>Config-driven.</strong> Queries, thresholds, schedules and destinations live in config, never in code.</li><li><strong>Idempotent.</strong> A re-run must never double-post. Persist a watermark or the IDs already sent.</li><li><strong>Defined empty-state behaviour.</strong> Event alerts stay silent; digests say "0 open".</li><li><strong>Actionable payload.</strong> Item link, owner, priority, time left and a link to the filtered list. Nothing else.</li><li><strong>Grouped.</strong> One message per owner or area, not one per item.</li><li><strong>Non-interactive.</strong> A scheduled job can't ask questions. It fails loudly rather than guessing.</li><li><strong>Fail visibly.</strong> If the query fails, post a <em>health</em> alert to the job owner. Never stay silent.</li><li><strong>Least privilege.</strong> Read-only tracker token; webhook scoped to one channel.</li><li><strong>Secrets outside the code,</strong> in a secret store or environment variables.</li><li><strong>Explicit time zones</strong> in schedules and message timestamps.</li><li><strong>Documented owner</strong> for the automation itself.</li></ol>
+<h2 id="4-example-config-fictional">4. Example config (fictional)</h2>
+<pre><code class="lang-yaml">jobs:
+  - name: slo-warning-digest
+    schedule: &quot;0 8 * * 1-5&quot;          # weekday mornings, team time zone
+    query: &quot;type = Defect AND status in (Open, &#x27;In Progress&#x27;)&quot;
+    evaluator: slo_warning           # see 05-quality-and-reliability/defect-slo-framework.md
+    group_by: [component, priority]
+    deliver: { kind: chat_webhook, secret_ref: SLO_ALERT_WEBHOOK }
+
+  - name: new-critical-alert
+    schedule: &quot;*/15 * * * *&quot;
+    query: &quot;type = Defect AND priority = P1&quot;
+    evaluator: new_since_watermark
+    deliver: { kind: chat_webhook, secret_ref: ONCALL_WEBHOOK }</code></pre>
+<h2 id="5-pseudocode">5. Pseudocode</h2>
+<pre><code class="lang-python">def run(now):
+    last_run = state.get(&quot;last_run&quot;, default=now - interval)
+    items = tracker.search(QUERY, updated_after=last_run)   # read-only
+    groups = classify(items)                 # priority, area, SLO bucket
+    if job.is_event_alert and not groups:
+        state.set(&quot;last_run&quot;, now)
+        return
+    chat.post(render(groups, now))
+    state.set(&quot;last_run&quot;, now)               # only after a successful post</code></pre>
+<p>The classification logic should be a plain, unit-testable function, separate from the scheduler. See <a href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/examples/slo_calculator.py"><code>examples/slo_calculator.py</code></a>.</p>
+<h2 id="6-message-format">6. Message format</h2>
+<pre><code>⚠️ 3 defects approaching SLO breach: Payments area
+• EX-2210  P2  Refund status not updating    1d 4h left  @owner
+• EX-2231  P3  CSV export timezone off       2d left     @owner
+• EX-2240  P3  Receipt email logo missing    5d left     @owner
+View all → &lt;dashboard link&gt;</code></pre>
+<p>Lead with the count and the action, group by owner, and link to the detail. <em>(Fictional data.)</em></p>
+<h2 id="7-failure-handling">7. Failure handling</h2>
+<div class="table-wrap"><table><thead><tr><th>Failure</th><th>Behaviour</th></tr></thead><tbody><tr><td>Tracker API unavailable</td><td>Retry with backoff, then alert the job owner. Never post partial data.</td></tr><tr><td>Query unexpectedly returns zero rows</td><td>Flag it as suspicious: the query may be broken</td></tr><tr><td>Webhook rejected</td><td>Log it and alert through a secondary channel</td></tr></tbody></table></div>
+<h2 id="8-maturity-path">8. Maturity path</h2>
+<ol><li>Manual weekly report</li><li>Scheduled summary</li><li>Threshold alerts with owners tagged</li><li>Trend detection ("this area's inflow doubled week on week")</li><li>AI-drafted narrative with linked evidence, reviewed by a person (see <a href="ai-assisted-pm-workflows.html">AI workflows</a>)</li></ol></article>
+    <div class="prevnext"><span></span><a href="ai-assisted-pm-workflows.html">ai assisted pm workflows →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/scheduled-alerting-pattern.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-architecture">1. Architecture</a><a href="#2-alert-archetypes">2. Alert archetypes</a><a href="#3-design-rules">3. Design rules</a><a href="#4-example-config-fictional">4. Example config (fictional)</a><a href="#5-pseudocode">5. Pseudocode</a><a href="#6-message-format">6. Message format</a><a href="#7-failure-handling">7. Failure handling</a><a href="#8-maturity-path">8. Maturity path</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

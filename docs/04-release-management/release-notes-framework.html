@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Release Notes Framework · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html" aria-current="page"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../04-release-management/index.html">Release Management</a></div>
+    <article><h1 id="release-notes-framework">Release Notes Framework</h1>
+<p><strong>Skill:</strong> Change communication · <strong>Competency:</strong> Turning engineering changes into communication suited to each audience</p>
+<h2 id="1-principle-capture-at-merge-compile-at-release">1. Principle: capture at merge, compile at release</h2>
+<p>Hand-written notes drift from what actually shipped. Capture change metadata <strong>when the change is made</strong>, then <em>compile</em> the release notes.</p>
+<pre><code>Per-change entry (at merge) ──► Collected between release tags ──► Edited by a person ──► Published editions
+                                                                                         ├── Customer
+                                                                                         ├── Support / internal
+                                                                                         └── Operator</code></pre>
+<h2 id="2-per-change-entry-schema">2. Per-change entry schema</h2>
+<pre><code class="lang-yaml">change_ref: &lt;work item or PR reference&gt;
+component: &lt;component&gt;
+type: feature | improvement | fix | security | deprecation | breaking
+summary: &quot;You can now…&quot;          # one sentence, user language, ≤ 200 chars
+customer_visible: true | false
+requires_action: none | config | migration | client-update
+risk: low | medium | high</code></pre>
+<p><strong>Validation rules (automatable)</strong></p>
+<ul><li><code>summary</code> is present and short</li><li><code>breaking</code> changes include migration steps</li><li>Customer-visible summaries contain no internal jargon or identifiers</li></ul>
+<h2 id="3-template">3. Template</h2>
+<pre><code class="lang-markdown"># &lt;Product&gt; &lt;Version&gt;: Release Notes
+Release date: YYYY-MM-DD
+
+## Highlights
+- 2–4 bullets on what matters most to users
+
+## ✨ New features
+- **&lt;Feature&gt;:** what it does and who benefits
+
+## 🛠 Improvements
+- &lt;Change&gt;, with the measurable effect if known
+
+## 🐞 Fixes
+- Fixed &lt;symptom&gt; when &lt;condition&gt;
+
+## ⚠️ Breaking changes &amp; required actions
+| Change | Who is affected | Action required | Deadline |
+|---|---|---|---|
+
+## Deprecations
+- &lt;Item&gt;: removal planned in &lt;version/date&gt;
+
+## Known issues
+- &lt;Issue&gt;, with a workaround
+
+---
+## Operator / internal appendix (never published externally)
+| Item | Feature flag | Default | Owning team | Rollback impact |
+|---|---|---|---|---|
+- Config changes · Migrations (reversible?) · Component version changes</code></pre>
+<h2 id="4-worked-example-fictional">4. Worked example (fictional)</h2>
+<blockquote><p><strong>Example App 2.8.0</strong><br><strong>✨ Saved carts:</strong> save a cart and finish checking out on any device.<br><strong>🛠</strong> The checkout page loads about 30% faster on mobile.<br><strong>🐞</strong> Fixed discount codes not applying to bundled items.<br><strong>⚠️ Known issue:</strong> saved carts expire after 30 days. A configurable expiry is planned.</p></blockquote>
+<h2 id="5-style-rules">5. Style rules</h2>
+<ul><li>Describe the <strong>effect</strong>, not the implementation. Write "Search results load faster", not "Refactored the query builder".</li><li>One change per bullet, one sentence each.</li><li>Describe the symptom that was fixed, not its internal cause.</li><li>Never include internal ticket IDs, hostnames, code names or people's names in customer editions.</li><li>Group by impact, not by team.</li></ul></article>
+    <div class="prevnext"><a href="rollback-planning-template.html">← rollback planning template</a><span></span></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/release-notes-framework.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-principle-capture-at-merge-compile-at-release">1. Principle: capture at merge, compile at release</a><a href="#2-per-change-entry-schema">2. Per-change entry schema</a><a href="#3-template">3. Template</a><a href="#4-worked-example-fictional">4. Worked example (fictional)</a><a href="#5-style-rules">5. Style rules</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

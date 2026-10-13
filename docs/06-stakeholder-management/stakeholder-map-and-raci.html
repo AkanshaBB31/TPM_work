@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stakeholder Map &amp; RACI · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html" aria-current="page"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../06-stakeholder-management/index.html">Stakeholder Management</a></div>
+    <article><h1 id="stakeholder-map-amp-raci">Stakeholder Map &amp; RACI</h1>
+<p><strong>Skill:</strong> Stakeholder management · <strong>Standard:</strong> PMBOK stakeholder engagement</p>
+<h2 id="1-power-interest-grid">1. Power / interest grid</h2>
+<pre><code>              HIGH INTEREST
+                   │
+    Keep           │   Manage
+    satisfied      │   closely
+  ─────────────────┼─────────────────  HIGH POWER ▶
+    Monitor        │   Keep
+                   │   informed
+                   │
+              LOW INTEREST</code></pre>
+<h2 id="2-register">2. Register</h2>
+<div class="table-wrap"><table><thead><tr><th>Stakeholder (role)</th><th>Power</th><th>Interest</th><th>Quadrant</th><th>Current stance</th><th>Desired stance</th><th>What they care about</th><th>Engagement approach</th><th>Owner</th></tr></thead><tbody><tr><td>Executive sponsor</td><td>H</td><td>H</td><td>Manage closely</td><td>Supportive</td><td>Champion</td><td>Business outcome, risk</td><td>Fortnightly 1:1; executive report</td><td>TPM</td></tr><tr><td>Head of Support</td><td>M</td><td>H</td><td>Keep informed</td><td>Concerned</td><td>Supportive</td><td>Defect SLOs, known issues</td><td>Weekly SLO digest; triage invite; early release notes</td><td>QA lead</td></tr><tr><td>Security lead</td><td>H</td><td>M</td><td>Keep satisfied</td><td>Neutral</td><td>Supportive</td><td>Release risk</td><td>Early design review; release gate</td><td>Eng lead</td></tr><tr><td>Finance partner</td><td>H</td><td>L</td><td>Keep satisfied</td><td>Neutral</td><td>Neutral</td><td>Budget variance</td><td>Monthly summary</td><td>TPM</td></tr><tr><td>End-user group</td><td>L</td><td>H</td><td>Keep informed</td><td>Concerned</td><td>Supportive</td><td>Usability, change impact</td><td>Demos, release notes</td><td>Product</td></tr></tbody></table></div>
+<p><em>Use roles, not real names, in shared templates.</em></p>
+<p><strong>Stance scale:</strong> Resistant → Concerned → Neutral → Supportive → Champion</p>
+<p>Revisit the register at each phase gate, because stakeholders move between quadrants as a program progresses.</p>
+<h2 id="3-raci-for-key-activities">3. RACI for key activities</h2>
+<div class="table-wrap"><table><thead><tr><th>Activity</th><th>Sponsor</th><th>TPM / PM</th><th>Product</th><th>Eng lead</th><th>QA</th><th>Support</th></tr></thead><tbody><tr><td>Scope sign-off</td><td>A</td><td>C</td><td>R</td><td>C</td><td>I</td><td>I</td></tr><tr><td>Quarterly commitment baseline</td><td>I</td><td>A</td><td>R</td><td>R</td><td>C</td><td>I</td></tr><tr><td>Release go/no-go</td><td>I</td><td>A/R</td><td>C</td><td>C</td><td>C</td><td>I</td></tr><tr><td>Defect prioritisation</td><td>I</td><td>C</td><td>A</td><td>R</td><td>R</td><td>C</td></tr><tr><td>Status reporting</td><td>I</td><td>A/R</td><td>C</td><td>C</td><td>C</td><td>I</td></tr><tr><td>Customer communication</td><td>I</td><td>R</td><td>A</td><td>C</td><td>I</td><td>C</td></tr></tbody></table></div>
+<p><em>R = Responsible · A = Accountable (exactly one per row) · C = Consulted · I = Informed</em></p>
+<h2 id="4-engagement-principles">4. Engagement principles</h2>
+<ul><li><strong>No surprises:</strong> bad news reaches sponsors in person <em>before</em> it appears in a report.</li><li><strong>Tailor the depth:</strong> executives get outcomes and asks; teams get detail.</li><li><strong>Frame requests in terms of their goals,</strong> not yours.</li><li><strong>One source of truth:</strong> every report links to the same tracker or dashboard.</li></ul></article>
+    <div class="prevnext"><span></span><a href="communication-plan-template.html">communication plan template →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/06-stakeholder-management/stakeholder-map-and-raci.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-power-interest-grid">1. Power / interest grid</a><a href="#2-register">2. Register</a><a href="#3-raci-for-key-activities">3. RACI for key activities</a><a href="#4-engagement-principles">4. Engagement principles</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

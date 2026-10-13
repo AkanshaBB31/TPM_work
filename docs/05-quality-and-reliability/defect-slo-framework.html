@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defect Resolution SLO Framework · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html" aria-current="page"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../05-quality-and-reliability/index.html">Quality &amp; Reliability</a></div>
+    <article><h1 id="defect-resolution-slo-framework">Defect Resolution SLO Framework</h1>
+<p><strong>Skill:</strong> Service level management · <strong>Competency:</strong> Quality governance and proactive risk detection<br><strong>Standards:</strong> ITIL incident &amp; problem management, Google SRE (SLIs/SLOs)</p>
+<blockquote><p><strong>Every threshold here is illustrative.</strong> Agree real values with support, engineering and customer-facing teams, based on customer impact and contracts.</p></blockquote>
+<h2 id="1-why-defect-slos">1. Why defect SLOs?</h2>
+<p>Without explicit targets, defects get prioritised by whoever shouts loudest. SLOs give you:</p>
+<ul><li>a shared, objective definition of <em>late</em></li><li>an <strong>early warning</strong> before a commitment is missed</li><li>trend data that shows whether quality is improving</li></ul>
+<h2 id="2-priority-model">2. Priority model</h2>
+<p>Rate <em>severity</em> (technical impact) and <em>priority</em> (business urgency) separately. <strong>Priority drives the SLO.</strong> Derive it from the impact × urgency matrix in the <a href="defect-triage-playbook.html">triage playbook</a>.</p>
+<div class="table-wrap"><table><thead><tr><th>Priority</th><th>Definition</th><th>Example (fictional)</th></tr></thead><tbody><tr><td><strong>P1</strong></td><td>Core function down or data at risk; no workaround</td><td>Customers can't complete checkout</td></tr><tr><td><strong>P2</strong></td><td>Major function impaired; workaround exists</td><td>Reports load, but export fails</td></tr><tr><td><strong>P3</strong></td><td>Minor function impaired</td><td>Sorting is wrong on one column</td></tr><tr><td><strong>P4</strong></td><td>Cosmetic</td><td>Typo in a tooltip</td></tr></tbody></table></div>
+<h2 id="3-targets-illustrative-defaults">3. Targets (illustrative defaults)</h2>
+<pre><code class="lang-yaml">slo:
+  P1: { target_days: 3,  warn_within_days: 1 }
+  P2: { target_days: 14, warn_within_days: 4 }
+  P3: { target_days: 30, warn_within_days: 7 }
+  P4: null                       # best effort
+active_states: [Open, In Progress, Reopened, In Review]
+clock: calendar_days             # or business_days</code></pre>
+<h2 id="4-classification">4. Classification</h2>
+<pre><code>age = (resolved_at or now) − created_at
+
+resolved and age ≤ target         → ✅ MET
+resolved and age &gt; target         → ❌ BREACHED (closed late)
+open     and age &gt; target         → ❌ BREACHED (open)
+open     and age &gt; target − warn  → ⚠️ WARNING
+otherwise                         → 🟢 ON TRACK</code></pre>
+<p><strong>Attainment % = MET ÷ (MET + BREACHED)</strong></p>
+<p>A working implementation: <a href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/examples/slo_calculator.py"><code>slo_calculator.py</code></a>.</p>
+<h2 id="5-decisions-to-make-up-front">5. Decisions to make up front</h2>
+<div class="table-wrap"><table><thead><tr><th>Question</th><th>Common choice</th></tr></thead><tbody><tr><td>Calendar or business days?</td><td>Calendar days: simpler, and closer to what customers experience</td></tr><tr><td>When does the clock start?</td><td>At triage confirmation, unless contracts say otherwise</td></tr><tr><td>Does it pause while waiting on the customer?</td><td>Yes, but log each pause and cap the total</td></tr><tr><td>What if the priority changes?</td><td>Measure against the <strong>highest</strong> priority the defect ever had</td></tr><tr><td>Reopened defects?</td><td>Resume the original clock; don't reset it</td></tr><tr><td>What counts as resolved?</td><td>The fix is deployed to production, not just merged</td></tr></tbody></table></div>
+<h2 id="6-reporting-views">6. Reporting views</h2>
+<div class="table-wrap"><table><thead><tr><th>View</th><th>Question it answers</th></tr></thead><tbody><tr><td><strong>By priority</strong></td><td>Are we meeting our commitments on critical issues?</td></tr><tr><td><strong>By product area / component</strong></td><td>Which area is falling behind?</td></tr><tr><td><strong>By customer segment / environment</strong></td><td>Who is feeling the impact?</td></tr><tr><td><strong>Trend</strong></td><td>Is weekly attainment improving?</td></tr><tr><td><strong>Action list</strong></td><td>Which WARNING items, sorted by time left, need an owner today?</td></tr></tbody></table></div>
+<p>Summary shape (fictional data):</p>
+<div class="table-wrap"><table><thead><tr><th>Priority</th><th>Total</th><th>Met</th><th>Breached</th><th>Warning</th><th>On track</th><th>Attainment</th></tr></thead><tbody><tr><td>P1</td><td>12</td><td>10</td><td>1</td><td>1</td><td>0</td><td>91%</td></tr><tr><td>P2</td><td>40</td><td>30</td><td>4</td><td>3</td><td>3</td><td>88%</td></tr><tr><td>P3</td><td>95</td><td>80</td><td>3</td><td>4</td><td>8</td><td>96%</td></tr></tbody></table></div>
+<h2 id="7-alerting-cadence">7. Alerting cadence</h2>
+<div class="table-wrap"><table><thead><tr><th>Alert</th><th>Frequency</th><th>Audience</th><th>Content</th></tr></thead><tbody><tr><td>New critical defect</td><td>Near real time</td><td>On-call, leads</td><td>Item, priority, area</td></tr><tr><td>Approaching breach</td><td>Daily</td><td>Owning teams</td><td>WARNING items + time left, grouped by owner</td></tr><tr><td>Breached</td><td>Daily</td><td>Leads &amp; managers</td><td>BREACHED items grouped by area</td></tr><tr><td>Digest</td><td>Weekly</td><td>Leadership</td><td>Attainment %, trend, top risks</td></tr></tbody></table></div>
+<p>Implementation pattern: <a href="../08-automation/scheduled-alerting-pattern.html">scheduled alerting</a>.</p>
+<h2 id="8-breach-response">8. Breach response</h2>
+<ol><li>The owner posts a recovery ETA and the blocker within 1 business day.</li><li>No owner or no ETA → escalate to the engineering manager.</li><li>Repeated breaches in one area → a problem-management review of the root cause, not the symptoms.</li></ol>
+<h2 id="9-pitfalls">9. Pitfalls</h2>
+<ul><li><strong>Priority gaming:</strong> audit downgrades. A sudden drop in P1 volume is a signal.</li><li><strong>Overwritten history:</strong> trackers overwrite priority and status, so rebuild history from the change log and keep daily snapshots so that trend lines stay stable.</li><li><strong>Alert fatigue:</strong> send one grouped digest per owner, not one message per defect.</li></ul></article>
+    <div class="prevnext"><span></span><a href="defect-triage-playbook.html">defect triage playbook →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/defect-slo-framework.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-why-defect-slos">1. Why defect SLOs?</a><a href="#2-priority-model">2. Priority model</a><a href="#3-targets-illustrative-defaults">3. Targets (illustrative defaults)</a><a href="#4-classification">4. Classification</a><a href="#5-decisions-to-make-up-front">5. Decisions to make up front</a><a href="#6-reporting-views">6. Reporting views</a><a href="#7-alerting-cadence">7. Alerting cadence</a><a href="#8-breach-response">8. Breach response</a><a href="#9-pitfalls">9. Pitfalls</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

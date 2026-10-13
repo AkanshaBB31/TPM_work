@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Change Readiness Gate &amp; Go/No-Go Meeting · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html" aria-current="page"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../04-release-management/index.html">Release Management</a></div>
+    <article><h1 id="change-readiness-gate-amp-gono-go-meeting">Change Readiness Gate &amp; Go/No-Go Meeting</h1>
+<p><strong>Skill:</strong> Release governance · <strong>Standard:</strong> ITIL 4 Change Enablement (CAB / change authority)</p>
+<p>Without explicit criteria, readiness reviews turn into status meetings, and decisions go to whoever sounds most confident. A <strong>gate</strong> makes readiness a checkable state that's evaluated <em>before</em> the meeting, so the meeting only has to deal with exceptions.</p>
+<hr>
+<h2 id="part-1-the-gate">Part 1: The gate</h2>
+<p>An item is <strong>Ready</strong> only when <strong>all mandatory criteria</strong> pass. Advisory signals add context but never block on their own.</p>
+<h3 id="mandatory-criteria-examples-tailor-them-to-your-process">Mandatory criteria (examples; tailor them to your process)</h3>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Criterion</th><th>Evidence source</th><th>Pass rule</th></tr></thead><tbody><tr><td>M1</td><td>Planned date falls in the review window</td><td>Planned release date</td><td>Within the configured window</td></tr><tr><td>M2</td><td>Work is complete and verified</td><td>Tracker status</td><td>Status is in your organisation's "verified" set</td></tr><tr><td>M3</td><td>Test evidence exists</td><td>Linked test run</td><td>A passing regression run since the last code change</td></tr><tr><td>M4</td><td>Rollback plan exists</td><td>Linked document</td><td>Reviewed by the owning team</td></tr><tr><td>M5</td><td>No blocking defects</td><td>Linked defects</td><td>Zero open defects at the highest severity</td></tr></tbody></table></div>
+<h3 id="advisory-signals">Advisory signals</h3>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Signal</th><th>Why it matters</th></tr></thead><tbody><tr><td>A1</td><td>Stakeholder acceptance completed</td><td>Reduces acceptance surprises</td></tr><tr><td>A2</td><td>Release owner assigned</td><td>Someone is accountable</td></tr><tr><td>A3</td><td>Change is unplanned / expedited</td><td>Gets closer scrutiny</td></tr></tbody></table></div>
+<h3 id="outcome-states">Outcome states</h3>
+<div class="table-wrap"><table><thead><tr><th>State</th><th>Meaning</th><th>Action</th></tr></thead><tbody><tr><td>✅ Ready</td><td>All mandatory criteria pass</td><td>Consent agenda: approve without discussion</td></tr><tr><td>🟡 At risk</td><td>A gap that can be fixed before the review</td><td>Nudge the owner about the specific gap</td></tr><tr><td>🔴 Not ready</td><td>A gap that can't be fixed in time</td><td>Defer to the next window, or escalate</td></tr><tr><td>⚪ Out of window</td><td>Planned outside this window</td><td>Listed for awareness</td></tr></tbody></table></div>
+<h3 id="example-fictional">Example (fictional)</h3>
+<div class="table-wrap"><table><thead><tr><th>Item</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>Outcome</th><th>Gap</th></tr></thead><tbody><tr><td>Checkout redesign</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅ Ready</td><td></td></tr><tr><td>Search ranking v2</td><td>✅</td><td>✅</td><td>❌</td><td>✅</td><td>✅</td><td>🟡 At risk</td><td>No regression run since the last merge</td></tr><tr><td>Loyalty points API</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td><td>🔴 Not ready</td><td>Still in development</td></tr><tr><td>Admin audit log</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>⚪ Out of window</td><td>Next cycle</td></tr></tbody></table></div>
+<h3 id="design-notes">Design notes</h3>
+<ul><li><strong>Make the criteria data-driven.</strong> Each one should map to a tracker field or link. A criterion that can't be checked automatically gets skipped under pressure.</li><li><strong>Keep thresholds in version-controlled config,</strong> not in people's heads.</li><li><strong>Show the reason, not just the flag.</strong> "Not ready: no test evidence" gets fixed faster than a red cell.</li><li>The evaluation is easy to automate (see the <a href="../08-automation/scheduled-alerting-pattern.html">scheduled alerting pattern</a>).</li></ul>
+<hr>
+<h2 id="part-2-the-gono-go-meeting-30-min">Part 2: The go/no-go meeting (30 min)</h2>
+<h3 id="timeline">Timeline</h3>
+<div class="table-wrap"><table><thead><tr><th>When</th><th>Activity</th></tr></thead><tbody><tr><td>T-N days</td><td>Pull candidates with a saved query; evaluate the gate; publish the readiness report</td></tr><tr><td>T-1 day</td><td>Owners close gaps; re-run the gate. 🟡/🔴 owners prepare a recommendation (fix, defer or accept the risk)</td></tr><tr><td>T-0</td><td>Meeting. <strong>Cancel it if no decision-maker can attend.</strong></td></tr></tbody></table></div>
+<h3 id="agenda">Agenda</h3>
+<div class="table-wrap"><table><thead><tr><th>Time</th><th>Segment</th><th>Output</th></tr></thead><tbody><tr><td>0–5</td><td><strong>Consent agenda:</strong> read out the ✅ items; approve unless someone objects</td><td>Bulk approval</td></tr><tr><td>5–20</td><td><strong>Exceptions:</strong> each 🟡/🔴 owner presents the gap, the options and a recommendation</td><td>A decision per item</td></tr><tr><td>20–25</td><td><strong>Operational check:</strong> on-call, rollback, communications</td><td>Confirmation</td></tr><tr><td>25–30</td><td><strong>Recap:</strong> read back each decision and its owner</td><td><a href="../01-program-governance/decision-log-template.html">Decision log</a> entry</td></tr></tbody></table></div>
+<h3 id="decision-options">Decision options</h3>
+<ul><li><strong>Go:</strong> ship as planned</li><li><strong>Go with conditions:</strong> ship if a named condition is met by a set time</li><li><strong>No-go, defer:</strong> move to the next window</li><li><strong>No-go, escalate:</strong> a cross-team blocker needs sponsor input</li></ul>
+<p><strong>Decision rule:</strong> any failed gate means <strong>No-go</strong> unless the accountable approver records a waiver that names the risk.</p>
+<h3 id="anti-patterns">Anti-patterns</h3>
+<ul><li>Walking through every item one by one, whether it's ready or not</li><li>Deciding without the release owner present</li><li>Treating "we'll monitor closely" as a mitigation plan</li><li>Leaving the meeting without written decisions</li></ul></article>
+    <div class="prevnext"><a href="release-readiness-checklist.html">← release readiness checklist</a><a href="rollback-planning-template.html">rollback planning template →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/change-readiness-gate-and-go-no-go.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

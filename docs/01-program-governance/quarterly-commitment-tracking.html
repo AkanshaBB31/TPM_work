@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarterly Commitment Tracking Framework · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html" aria-current="page"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../01-program-governance/index.html">Program Governance</a></div>
+    <article><h1 id="quarterly-commitment-tracking-framework">Quarterly Commitment Tracking Framework</h1>
+<p><strong>Skill:</strong> Program governance · <strong>Competency:</strong> Portfolio planning and delivery assurance</p>
+<p>A lightweight way to make quarterly commitments visible, measurable and honest. It works for any organisation that plans in quarters and executes in sprints.</p>
+<h2 id="1-principles">1. Principles</h2>
+<ol><li><strong>A commitment is a promise with a date.</strong> It has one owner, one target quarter and a clear definition of done.</li><li><strong>Lock the baseline.</strong> Snapshot the committed list on day 1. Anything added later counts as <em>scope added</em>.</li><li><strong>Never blend quarters.</strong> Report each quarter on its own, because averaging across quarters hides a bad one.</li><li><strong>Done means in customers' hands.</strong> An item counts as delivered only when it's released to production, or to another agreed final environment.</li></ol>
+<h2 id="2-commitment-register">2. Commitment register</h2>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Commitment</th><th>Owner (role)</th><th>Program</th><th>Target Qtr</th><th>Size</th><th>Status</th><th>Confidence</th><th>Target date</th><th>Actual date</th></tr></thead><tbody><tr><td>C-01</td><td>Self-serve onboarding flow</td><td>Growth EM</td><td>Growth</td><td>Q2</td><td>L</td><td>In progress</td><td>🟢 High</td><td>2026-06-12</td><td></td></tr><tr><td>C-02</td><td>Audit log export</td><td>Platform EM</td><td>Platform</td><td>Q2</td><td>M</td><td>At risk</td><td>🟠 Medium</td><td>2026-05-29</td><td></td></tr><tr><td>C-03</td><td>Mobile push preferences</td><td>Mobile EM</td><td>Engagement</td><td>Q2</td><td>S</td><td>Done</td><td></td><td>2026-04-30</td><td>2026-04-28</td></tr></tbody></table></div>
+<ul><li><strong>Status flow:</strong> Not started → In progress → In review/test → Released → Done</li><li><strong>Off-track states:</strong> <em>At risk</em> (still achievable with intervention) and <em>Slipped</em> (moved to a later quarter). A slipped item stays in its original quarter's report as a miss.</li><li><strong>Confidence</strong> is set by the owner each week, not inferred by the PM.</li></ul>
+<h2 id="3-weekly-scorecard">3. Weekly scorecard</h2>
+<pre><code>Q2 Commitments: Week 7 of 13
+──────────────────────────────────────
+Committed (baseline)      24
+Delivered                  9   (38%)
+On track                  10
+At risk                    3   → see risk notes
+Slipped                    2   → moved to Q3, reasons logged
+Scope added mid-quarter    4   (tracked separately)
+Expected landing       19–21 of 24 (79–88%)</code></pre>
+<p>Give expected landing as a <strong>range</strong>. A single number implies false precision.</p>
+<h2 id="4-views-every-report-should-support">4. Views every report should support</h2>
+<ul><li>Filter by program, team, quarter (current by default), status and confidence</li><li><strong>Data hygiene exception:</strong> items marked done but without a release date. Surface these rather than hiding them.</li></ul>
+<h2 id="5-cadence">5. Cadence</h2>
+<div class="table-wrap"><table><thead><tr><th>When</th><th>What</th><th>Who</th></tr></thead><tbody><tr><td>Quarter start</td><td>Lock and publish the baseline</td><td>PM + owners</td></tr><tr><td>Weekly</td><td>Update confidence and refresh the scorecard</td><td>Owners → PM</td></tr><tr><td>Bi-weekly</td><td>Steering review of at-risk items</td><td>PM + sponsors</td></tr><tr><td>Quarter end</td><td>Close out: % delivered, slip reasons, lessons learned</td><td>PM</td></tr></tbody></table></div>
+<h2 id="6-close-out-questions">6. Close-out questions</h2>
+<ul><li>What share of slips came from estimation, dependencies, scope change or capacity?</li><li>Did mid-quarter additions displace committed work?</li><li>Were risks raised early (more than 3 weeks before the slip) or late?</li></ul></article>
+    <div class="prevnext"><a href="decision-log-template.html">← decision log template</a><a href="vendor-management-framework.html">vendor management framework →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/quarterly-commitment-tracking.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-principles">1. Principles</a><a href="#2-commitment-register">2. Commitment register</a><a href="#3-weekly-scorecard">3. Weekly scorecard</a><a href="#4-views-every-report-should-support">4. Views every report should support</a><a href="#5-cadence">5. Cadence</a><a href="#6-close-out-questions">6. Close-out questions</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

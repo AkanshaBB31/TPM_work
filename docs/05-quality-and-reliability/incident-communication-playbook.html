@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Incident Communication Playbook · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html" aria-current="page"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../05-quality-and-reliability/index.html">Quality &amp; Reliability</a></div>
+    <article><h1 id="incident-communication-playbook">Incident Communication Playbook</h1>
+<p><strong>Skill:</strong> Crisis &amp; incident communication · <strong>Competency:</strong> Keeping stakeholders informed during incidents, so that engineers can focus on fixing them</p>
+<p>Poor communication turns a technical incident into a trust incident. This playbook separates <strong>fixing</strong> from <strong>informing</strong>.</p>
+<h2 id="1-roles">1. Roles</h2>
+<div class="table-wrap"><table><thead><tr><th>Role</th><th>Responsibility</th></tr></thead><tbody><tr><td>Incident commander (IC)</td><td>Owns the response; makes the decisions; doesn't debug</td></tr><tr><td>Technical lead</td><td>Leads diagnosis and the fix</td></tr><tr><td><strong>Communications lead</strong> (often the TPM)</td><td>Owns every update to stakeholders and customers</td></tr><tr><td>Scribe</td><td>Keeps the timeline for the <a href="post-incident-review-template.html">post-incident review</a></td></tr></tbody></table></div>
+<h2 id="2-update-cadence-by-severity-illustrative">2. Update cadence by severity (illustrative)</h2>
+<div class="table-wrap"><table><thead><tr><th>Severity</th><th>Internal update</th><th>Customer/status page</th><th>Executive notification</th></tr></thead><tbody><tr><td>SEV-1 (major outage)</td><td>Every 30 min</td><td>Within 15 min of declaration, then every 30–60 min</td><td>Immediately</td></tr><tr><td>SEV-2 (partial degradation)</td><td>Every 60 min</td><td>If customer-visible</td><td>Within 1 hour</td></tr><tr><td>SEV-3 (minor)</td><td>At start and end</td><td>Usually not</td><td>Daily summary</td></tr></tbody></table></div>
+<p><strong>Always say when the next update will come, and keep to it,</strong> even if there's no news.</p>
+<h2 id="3-templates">3. Templates</h2>
+<h3 id="initial-notice">Initial notice</h3>
+<pre><code>[SEV-&lt;n&gt;] &lt;Service/feature&gt; degraded. Investigating.
+Impact:  &lt;who is affected and how; what still works&gt;
+Started: &lt;time, tz&gt;
+Status:  Investigating
+Next update: &lt;time, tz&gt;
+IC: &lt;role&gt;   Channel: &lt;incident channel&gt;</code></pre>
+<h3 id="progress-update">Progress update</h3>
+<pre><code>[SEV-&lt;n&gt;] Update &lt;#&gt;: &lt;one-line status&gt;
+What we know: &lt;cause if known, or &quot;still investigating&quot;&gt;
+What we&#x27;re doing: &lt;current mitigation&gt;
+Customer impact now: &lt;better / same / worse&gt;
+Next update: &lt;time, tz&gt;</code></pre>
+<h3 id="resolution">Resolution</h3>
+<pre><code>[SEV-&lt;n&gt;] Resolved: &lt;service&gt; back to normal as of &lt;time, tz&gt;.
+Duration: &lt;x min&gt;. Impact: &lt;summary&gt;.
+Cause (preliminary): &lt;one line&gt;.
+Post-incident review scheduled for &lt;date&gt;.</code></pre>
+<h2 id="4-writing-rules">4. Writing rules</h2>
+<ul><li><strong>Impact first,</strong> in plain language. No internal jargon in customer messages.</li><li><strong>Don't speculate</strong> about the cause in external messages.</li><li><strong>No blame,</strong> and no names, in any update.</li><li><strong>One channel per audience:</strong> an incident channel for responders, a status page for customers, a summary email for executives.</li><li>Time zones are always explicit.</li></ul>
+<h2 id="5-audience-matrix">5. Audience matrix</h2>
+<div class="table-wrap"><table><thead><tr><th>Audience</th><th>Needs to know</th><th>Channel</th></tr></thead><tbody><tr><td>Responders</td><td>Everything technical</td><td>Incident chat channel</td></tr><tr><td>Support</td><td>Impact, workaround, customer wording</td><td>Support channel + macro</td></tr><tr><td>Executives</td><td>Impact, ETA, business risk, asks</td><td>Short email / chat DM</td></tr><tr><td>Customers</td><td>Impact, what to do, when it'll be fixed</td><td>Status page</td></tr></tbody></table></div>
+<h2 id="6-after-the-incident">6. After the incident</h2>
+<ul><li>Send the resolution summary within 24 hours</li><li>Share the post-incident review outcomes with the affected stakeholders</li><li>Track customer-facing follow-ups (credits, apologies) to closure</li></ul></article>
+    <div class="prevnext"><a href="post-incident-review-template.html">← post incident review template</a><span></span></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/incident-communication-playbook.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-roles">1. Roles</a><a href="#2-update-cadence-by-severity-illustrative">2. Update cadence by severity (illustrative)</a><a href="#3-templates">3. Templates</a><a href="#4-writing-rules">4. Writing rules</a><a href="#5-audience-matrix">5. Audience matrix</a><a href="#6-after-the-incident">6. After the incident</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

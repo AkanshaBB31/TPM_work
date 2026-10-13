@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Release Readiness Checklist · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html" aria-current="page"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../04-release-management/index.html">Release Management</a></div>
+    <article><h1 id="release-readiness-checklist">Release Readiness Checklist</h1>
+<p><strong>Skill:</strong> Release management · <strong>Standard:</strong> ITIL 4 Release &amp; Change Enablement</p>
+<p>Use this checklist for each release candidate. Feed the results into the <a href="change-readiness-gate-and-go-no-go.html">go/no-go</a> 24–48 hours before the release window.</p>
+<ul><li><strong>Gate</strong> rows (🔒) block the release if they fail, unless an approver records an exception.</li><li><strong>Every tick needs evidence</strong>, either a link or an artifact. A tick without evidence doesn't count.</li></ul>
+<h2 id="release-ltversiongt-window-ltdate-time-tzgt-release-owner-ltrolegt">Release: <code>&lt;version&gt;</code> · Window: <code>&lt;date, time, tz&gt;</code> · Release owner: <code>&lt;role&gt;</code></h2>
+<h3 id="1-scope">1. Scope</h3>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Gate</th><th>Evidence</th><th>☐</th></tr></thead><tbody><tr><td>Scope frozen; item list attached</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Every item in a release-eligible state and linked to an approved backlog item</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Late additions approved by the release owner</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Descoped items moved to a later release and communicated</td><td></td><td></td><td>☐</td></tr></tbody></table></div>
+<h3 id="2-quality">2. Quality</h3>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Gate</th><th>Evidence</th><th>☐</th></tr></thead><tbody><tr><td>Regression suite passed on the release-candidate build</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>No open highest-severity defects; next-severity defects accepted in writing</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Security scan: no new critical or high findings, or exceptions documented</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Performance compared with the previous release (e.g. no regression &gt; 10%)</td><td></td><td></td><td>☐</td></tr></tbody></table></div>
+<h3 id="3-operational-readiness">3. Operational readiness</h3>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Gate</th><th>Evidence</th><th>☐</th></tr></thead><tbody><tr><td>Deployment runbook reviewed (and rehearsed, for major releases)</td><td>🔒</td><td></td><td>☐</td></tr><tr><td><a href="rollback-planning-template.html">Rollback plan</a> written and tested</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Database migrations backward compatible; tested forward and back</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>On-call confirmed for the release window</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Monitoring and alerts cover the new functionality</td><td></td><td></td><td>☐</td></tr><tr><td>Feature-flag states and defaults documented</td><td></td><td></td><td>☐</td></tr><tr><td><a href="../02-technical-program-management/operational-readiness-review.html">Operational readiness review</a> passed (new services)</td><td>🔒</td><td></td><td>☐</td></tr></tbody></table></div>
+<h3 id="4-dependencies">4. Dependencies</h3>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Gate</th><th>Evidence</th><th>☐</th></tr></thead><tbody><tr><td>Upstream/downstream components released or version-compatible</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Vendor or third-party changes confirmed</td><td></td><td></td><td>☐</td></tr></tbody></table></div>
+<h3 id="5-business-readiness">5. Business readiness</h3>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Gate</th><th>Evidence</th><th>☐</th></tr></thead><tbody><tr><td>Stakeholder demo / acceptance sign-off</td><td></td><td></td><td>☐</td></tr><tr><td><a href="release-notes-framework.html">Release notes</a> drafted</td><td></td><td></td><td>☐</td></tr><tr><td>Support briefed on changes and known issues</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Customer communications scheduled (if user-visible)</td><td></td><td></td><td>☐</td></tr></tbody></table></div>
+<h3 id="6-governance">6. Governance</h3>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Gate</th><th>Evidence</th><th>☐</th></tr></thead><tbody><tr><td>Change request raised and approved per policy</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Release window respects freeze periods</td><td>🔒</td><td></td><td>☐</td></tr><tr><td>Go/no-go decision recorded</td><td>🔒</td><td></td><td>☐</td></tr></tbody></table></div>
+<h2 id="sign-off">Sign-off</h2>
+<div class="table-wrap"><table><thead><tr><th>Role</th><th>Name</th><th>Decision</th><th>Date</th><th>Notes</th></tr></thead><tbody><tr><td>Release owner</td><td></td><td>Go / No-Go</td><td></td><td></td></tr><tr><td>QA lead</td><td></td><td>Go / No-Go</td><td></td><td></td></tr><tr><td>Engineering lead</td><td></td><td>Go / No-Go</td><td></td><td></td></tr><tr><td>Product owner</td><td></td><td>Go / No-Go</td><td></td><td></td></tr></tbody></table></div>
+<p><strong>Exceptions granted:</strong> <em>(item, reason, approver, expiry)</em></p></article>
+    <div class="prevnext"><span></span><a href="change-readiness-gate-and-go-no-go.html">change readiness gate and go no go →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/release-readiness-checklist.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

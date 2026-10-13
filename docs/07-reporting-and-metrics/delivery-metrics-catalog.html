@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delivery Metrics Catalog · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html" aria-current="page"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../07-reporting-and-metrics/index.html">Reporting &amp; Metrics</a></div>
+    <article><h1 id="delivery-metrics-catalog">Delivery Metrics Catalog</h1>
+<p><strong>Skill:</strong> Metrics design · <strong>Standards:</strong> DORA, Kanban flow metrics, Scrum<br><strong>Competency:</strong> Defining measurable, unambiguous KPIs that are hard to game</p>
+<h2 id="1-principles">1. Principles</h2>
+<ol><li><strong>Measure outcomes and flow, not busyness.</strong></li><li><strong>Pair every metric with a counter-metric,</strong> so one can't be gamed at another's expense.</li><li><strong>Trends beat snapshots:</strong> show at least six periods.</li><li><strong>Track no more than 6–8 headline metrics.</strong> Tracking everything means acting on nothing.</li><li><strong>Every metric has an owner and a "so what":</strong> if it moves, who acts, and how?</li><li><strong>Never use team metrics to rank individuals.</strong></li></ol>
+<h2 id="2-catalog">2. Catalog</h2>
+<h3 id="flow-amp-predictability-are-we-delivering-and-can-people-plan-around-us">Flow &amp; predictability: <em>are we delivering, and can people plan around us?</em></h3>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Formula</th><th>Watch for</th><th>Can be gamed by</th><th>Counter-metric</th></tr></thead><tbody><tr><td>Throughput</td><td>Items completed per period</td><td>Sustained drops</td><td>Splitting work artificially</td><td>Cycle time</td></tr><tr><td>Cycle time (p50 / p85)</td><td>Done − started</td><td>A growing tail</td><td>Starting work late</td><td>Throughput</td></tr><tr><td>Work-item age</td><td>Now − started (in-progress items)</td><td>Stuck items</td><td>—</td><td>WIP</td></tr><tr><td>WIP</td><td>Items in progress</td><td>Above team capacity</td><td>—</td><td>Throughput</td></tr><tr><td>Say/Do ratio</td><td>Completed committed ÷ committed</td><td>Consistently &lt; 80%</td><td>Under-committing</td><td>Velocity trend</td></tr><tr><td>Commitment delivery %</td><td>Delivered ÷ quarterly baseline</td><td>Misses</td><td>Committing to less</td><td>Scope delivered vs. roadmap</td></tr><tr><td>Release date variance</td><td>Actual − planned release date</td><td>Growing variance</td><td>Padding plans</td><td>Lead time</td></tr><tr><td>Readiness at T-N</td><td>% of release items passing the gate N days out</td><td>Late readiness</td><td>—</td><td>Change failure rate</td></tr><tr><td>Unplanned work ratio</td><td>Ad hoc items ÷ total</td><td>&gt; ~20%</td><td>Mis-labelling</td><td>Ticket inflow</td></tr></tbody></table></div>
+<h3 id="software-delivery-performance-dora">Software delivery performance (DORA)</h3>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Definition</th></tr></thead><tbody><tr><td>Deployment frequency</td><td>How often you deploy to production</td></tr><tr><td>Lead time for changes</td><td>Commit → running in production</td></tr><tr><td>Change failure rate</td><td>Deployments causing a failure, hotfix or rollback ÷ total</td></tr><tr><td>Time to restore (MTTR)</td><td>Failure → recovery</td></tr></tbody></table></div>
+<h3 id="quality-are-we-delivering-well">Quality: <em>are we delivering well?</em></h3>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Formula</th><th>Watch for</th><th>Can be gamed by</th><th>Counter-metric</th></tr></thead><tbody><tr><td>Escaped defects</td><td>Production defects per release</td><td>Upward trend</td><td>Not logging defects</td><td>Support ticket volume</td></tr><tr><td>Defect inflow vs. outflow</td><td>Created vs. resolved per week</td><td>Inflow &gt; outflow for 3+ weeks</td><td>Reclassifying tickets</td><td>Category mix</td></tr><tr><td>Defect SLO attainment</td><td>Met ÷ (Met + Breached)</td><td>Below target</td><td>Downgrading priority</td><td>Priority-change audit</td></tr><tr><td>Reopen rate</td><td>Reopened ÷ resolved</td><td>Rising</td><td>Not reopening</td><td>Escaped defects</td></tr><tr><td>MTTR (incidents)</td><td>Σ duration ÷ incidents</td><td>Rising</td><td>Closing incidents early</td><td>Repeat incidents</td></tr></tbody></table></div>
+<h3 id="stakeholder-value">Stakeholder value</h3>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Definition</th></tr></thead><tbody><tr><td>Demo acceptance rate</td><td>Items accepted at the first demo</td></tr><tr><td>Customer-reported issues</td><td>Volume and severity by segment</td></tr></tbody></table></div>
+<h2 id="3-metric-definition-card-fill-one-in-per-metric">3. Metric definition card (fill one in per metric)</h2>
+<pre><code>Name:
+Question it answers:
+Formula:
+Data source:
+Refresh cadence:
+Owner:
+Target / threshold (illustrative until calibrated):
+Paired counter-metric:
+Known caveats:</code></pre>
+<h2 id="4-anti-patterns">4. Anti-patterns</h2>
+<ul><li>Comparing velocity across teams</li><li>Setting targets on metrics the team directly controls (Goodhart's law)</li><li>Dashboards with no decision attached</li></ul>
+<h2 id="references">References</h2>
+<ul><li>Forsgren, Humble &amp; Kim, <em>Accelerate</em> (DORA)</li><li>Vacanti, <em>Actionable Agile Metrics for Predictability</em></li></ul></article>
+    <div class="prevnext"><a href="executive-status-report-template.html">← executive status report template</a><a href="dashboard-design-guide.html">dashboard design guide →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/07-reporting-and-metrics/delivery-metrics-catalog.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-principles">1. Principles</a><a href="#2-catalog">2. Catalog</a><a href="#3-metric-definition-card-fill-one-in-per-metric">3. Metric definition card (fill one in per metric)</a><a href="#4-anti-patterns">4. Anti-patterns</a><a href="#references">References</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

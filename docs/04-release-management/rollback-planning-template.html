@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rollback Planning Template · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html" aria-current="page"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../04-release-management/index.html">Release Management</a></div>
+    <article><h1 id="rollback-planning-template">Rollback Planning Template</h1>
+<p><strong>Skill:</strong> Release risk management · <strong>Standards:</strong> ITIL change enablement, SRE practices</p>
+<p>A rollback plan answers one question: <strong>if this release goes wrong, how do we get back to a known-good state, and how quickly?</strong> Agree it <em>before</em> release day.</p>
+<h2 id="1-summary">1. Summary</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Release</td><td><code>&lt;version&gt;</code></td></tr><tr><td>Previous known-good version</td><td></td></tr><tr><td>Rollback decision authority</td><td>e.g. on-call engineering lead</td></tr><tr><td>Max time to decide</td><td>e.g. 30 min after the first trigger</td></tr><tr><td>Target time to complete rollback</td><td>e.g. ≤ 20–30 min</td></tr><tr><td>Point of no return</td><td>The step after which only a roll-forward is possible</td></tr></tbody></table></div>
+<h2 id="2-triggers-any-one-values-illustrative">2. Triggers (any one; values illustrative)</h2>
+<div class="table-wrap"><table><thead><tr><th>Signal</th><th>Threshold</th></tr></thead><tbody><tr><td>Error rate</td><td>&gt; 2× the pre-release baseline for 10 min</td></tr><tr><td>Latency (p95)</td><td>&gt; 1.5× baseline for 10 min</td></tr><tr><td>Critical user journey</td><td>Synthetic check fails twice in a row</td></tr><tr><td>Data integrity</td><td>Any confirmed corruption</td></tr><tr><td>Severity-1 incident</td><td>Declared and attributed to the release</td></tr></tbody></table></div>
+<h2 id="3-strategy-by-change-type">3. Strategy by change type</h2>
+<div class="table-wrap"><table><thead><tr><th>Change type</th><th>Preferred rollback</th><th>Notes</th></tr></thead><tbody><tr><td>Feature behind a flag</td><td><strong>Turn the flag off</strong></td><td>Instant; no deploy (preferred)</td></tr><tr><td>Stateless service</td><td>Redeploy the previous artifact / blue-green switch</td><td>Keep the previous version warm</td></tr><tr><td>Config change</td><td>Revert the config</td><td>Version-controlled config only</td></tr><tr><td>Schema migration</td><td>Expand/contract (backward compatible)</td><td>Avoid destructive migrations in the same release</td></tr><tr><td>Data backfill</td><td>Restore a snapshot / run a compensating job</td><td>Take the snapshot before running</td></tr><tr><td>Last resort</td><td>Forward fix</td><td>Only if the above aren't possible and the fix takes &lt; 1 hour</td></tr></tbody></table></div>
+<h2 id="4-runbook">4. Runbook</h2>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Step</th><th>Owner</th><th>Est.</th><th>Verification</th></tr></thead><tbody><tr><td>1</td><td>Announce the rollback in the incident channel</td><td>Release owner</td><td>1 min</td><td>Acknowledged by on-call</td></tr><tr><td>2</td><td>Turn off flags / switch traffic / redeploy</td><td>On-call engineer</td><td>5–10 min</td><td>The version endpoint shows the previous version</td></tr><tr><td>3</td><td>Run smoke tests on critical journeys</td><td>QA</td><td>10 min</td><td>All pass</td></tr><tr><td>4</td><td>Confirm metrics are stable</td><td>On-call engineer</td><td>10 min</td><td>Errors back to baseline</td></tr><tr><td>5</td><td>Notify stakeholders</td><td>Release owner</td><td>5 min</td><td>Update sent (see <a href="../05-quality-and-reliability/incident-communication-playbook.html">incident communication</a>)</td></tr></tbody></table></div>
+<h2 id="5-data-considerations">5. Data considerations</h2>
+<ul><li>Can the old version read data written by the new one?</li><li>What happens to records created during the release window?</li><li>Are any migrations irreversible? If so, where's the backup?</li></ul>
+<h2 id="6-rehearsal">6. Rehearsal</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Rollback rehearsed in pre-production within the last 30 days</li><li><span class="box" aria-hidden="true">☐</span>Measured rollback time: ____ min</li></ul>
+<h2 id="7-after-a-rollback">7. After a rollback</h2>
+<ul><li>Blameless <a href="../05-quality-and-reliability/post-incident-review-template.html">post-incident review</a> within 3–5 business days</li><li>Agree the criteria for re-release; run a fresh go/no-go</li></ul></article>
+    <div class="prevnext"><a href="change-readiness-gate-and-go-no-go.html">← change readiness gate and go no go</a><a href="release-notes-framework.html">release notes framework →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/rollback-planning-template.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-summary">1. Summary</a><a href="#2-triggers-any-one-values-illustrative">2. Triggers (any one; values illustrative)</a><a href="#3-strategy-by-change-type">3. Strategy by change type</a><a href="#4-runbook">4. Runbook</a><a href="#5-data-considerations">5. Data considerations</a><a href="#6-rehearsal">6. Rehearsal</a><a href="#7-after-a-rollback">7. After a rollback</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

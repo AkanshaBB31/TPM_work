@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprint Reporting &amp; Forecasting · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html" aria-current="page"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../03-agile-delivery/index.html">Agile Delivery</a></div>
+    <article><h1 id="sprint-reporting-amp-forecasting">Sprint Reporting &amp; Forecasting</h1>
+<p><strong>Skill:</strong> Agile delivery governance · <strong>Competency:</strong> Sprint transparency, predictability tracking and range-based forecasting</p>
+<h2 id="part-1-one-page-sprint-report">Part 1: One-page sprint report</h2>
+<p>The report answers four questions: <em>What did we commit to? What did we finish? What changed? What do we need?</em></p>
+<hr>
+<h3 id="sprint-4-team-atlas-2026-04-13-2026-04-24-fictional">Sprint 4: Team Atlas · 2026-04-13 → 2026-04-24 <em>(fictional)</em></h3>
+<p><strong>Headline:</strong> Delivered 31 of 38 committed points (82%). Checkout redesign shipped. Two stories carried over because of a late API contract change.</p>
+<div class="table-wrap"><table><thead><tr><th>Committed</th><th>Completed</th><th>Say/Do</th><th>Carried over</th><th>Added mid-sprint</th><th>Defects closed</th></tr></thead><tbody><tr><td>38 pts</td><td>31 pts</td><td>82%</td><td>7 pts (2 stories)</td><td>5 pts</td><td>9</td></tr></tbody></table></div>
+<p><strong>Sprint goal outcome</strong></p>
+<ul><li>✅ Checkout redesign live for 100% of web users</li><li>⚠️ Saved-cart API is code complete; release blocked on contract sign-off</li></ul>
+<p><strong>Carry-over analysis</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Item</th><th>Points</th><th>Reason</th><th>Plan</th></tr></thead><tbody><tr><td>Saved-cart API</td><td>5</td><td>Upstream contract changed on day 6</td><td>Top of next sprint</td></tr><tr><td>Cart analytics events</td><td>2</td><td>Under-estimated</td><td>Re-estimated to 3</td></tr></tbody></table></div>
+<p><strong>Risks &amp; asks:</strong> the platform team should confirm the contract freeze by Tuesday.<br><strong>Retro highlights:</strong> keep pairing on complex stories; lock interface contracts before planning.</p>
+<hr>
+<h2 id="part-2-predictability-metrics">Part 2: Predictability metrics</h2>
+<blockquote><p>Use velocity to <strong>forecast</strong>, never to judge. Never compare velocity across teams.</p></blockquote>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Formula</th><th>Healthy signal (illustrative)</th></tr></thead><tbody><tr><td>Velocity</td><td>Points completed per sprint</td><td>Stable band (±20%)</td></tr><tr><td>Say/Do ratio</td><td>Completed committed ÷ committed</td><td>80–100%</td></tr><tr><td>Scope churn</td><td>(Added + removed mid-sprint) ÷ committed</td><td>&lt; 15%</td></tr><tr><td>Carry-over rate</td><td>Carried-over points ÷ committed</td><td>&lt; 15%</td></tr><tr><td>Rolling average</td><td>Mean of the last 3–6 sprints</td><td>Planning baseline</td></tr></tbody></table></div>
+<h3 id="trend-table">Trend table</h3>
+<div class="table-wrap"><table><thead><tr><th>Sprint</th><th>Quarter</th><th>Committed</th><th>Completed</th><th>Say/Do</th><th>Added</th><th>Carried</th></tr></thead><tbody><tr><td>S1</td><td>Q1</td><td>40</td><td>30</td><td>75%</td><td>6</td><td>10</td></tr><tr><td>S2</td><td>Q1</td><td>36</td><td>32</td><td>89%</td><td>3</td><td>4</td></tr><tr><td>S3</td><td>Q1</td><td>38</td><td>35</td><td>92%</td><td>2</td><td>3</td></tr><tr><td><strong>Q1 avg</strong></td><td></td><td><strong>38</strong></td><td><strong>32.3</strong></td><td><strong>85%</strong></td><td></td><td></td></tr><tr><td>S1</td><td>Q2</td><td>38</td><td>31</td><td>82%</td><td>5</td><td>7</td></tr></tbody></table></div>
+<p><strong>Rule:</strong> roll up each quarter on its own, so that one quarter never hides another.</p>
+<h2 id="part-3-forecasting-the-backlog">Part 3: Forecasting the backlog</h2>
+<pre><code>Remaining backlog:         120 pts
+Rolling velocity (last 4): 30–35 pts
+Forecast: 120 / 35 = 3.4 … 120 / 30 = 4.0  →  4 sprints (range 4–5 with buffer)</code></pre>
+<p>Always forecast as a <strong>range</strong>. For flow-based teams, use throughput (items per week) and Monte Carlo simulation instead of points.</p>
+<h2 id="anti-patterns">Anti-patterns</h2>
+<ul><li>Inflating estimates to "hit" velocity</li><li>Counting partially done stories</li><li>Re-baselining the commitment mid-sprint to hide misses</li></ul></article>
+    <div class="prevnext"><a href="standup-facilitation-guide.html">← standup facilitation guide</a><a href="retrospective-playbook.html">retrospective playbook →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/03-agile-delivery/sprint-reporting-and-forecasting.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#part-1-one-page-sprint-report">Part 1: One-page sprint report</a><a href="#part-2-predictability-metrics">Part 2: Predictability metrics</a><a href="#part-3-forecasting-the-backlog">Part 3: Forecasting the backlog</a><a href="#anti-patterns">Anti-patterns</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

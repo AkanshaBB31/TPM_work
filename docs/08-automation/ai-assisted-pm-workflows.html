@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Assisted Program Management Workflows · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html" aria-current="page"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../08-automation/index.html">Automation</a></div>
+    <article><h1 id="ai-assisted-program-management-workflows">AI-Assisted Program Management Workflows</h1>
+<p><strong>Skill:</strong> AI-assisted productivity · <strong>Competency:</strong> Designing safe, repeatable AI-agent workflows for delivery management</p>
+<p>Vendor-neutral patterns for using LLM agents with tool access to automate recurring program-management work, <strong>while keeping a person accountable</strong>.</p>
+<h2 id="1-workflow-catalog">1. Workflow catalog</h2>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Input</th><th>Agent does</th><th>Person does</th></tr></thead><tbody><tr><td><strong>Meeting → action items</strong></td><td>Notes / transcript</td><td>Extracts actions, owners, due dates and the supporting evidence; drafts tickets</td><td>Approves each item before it's created</td></tr><tr><td><strong>Findings → tickets</strong></td><td>Audit, health check or retro findings</td><td>Drafts tickets with the evidence attached</td><td>Approves; sets priority</td></tr><tr><td><strong>Requirements readiness review</strong></td><td>PRD + upstream goal doc</td><td>Checks it against the <a href="../03-agile-delivery/definition-of-ready-and-backlog-decomposition.html">Definition of Ready</a>; lists gaps</td><td>Decides whether it's ready</td></tr><tr><td><strong>Requirements → backlog</strong></td><td>Approved PRD</td><td>Proposes an epic → story breakdown with acceptance criteria</td><td>Re-sizes, re-orders, approves</td></tr><tr><td><strong>Status report draft</strong></td><td>Tracker query + last report</td><td>Drafts the bottom line, RAG and changes since last week</td><td>Edits tone; adds the asks</td></tr><tr><td><strong>Progress digest</strong></td><td>Completed items, merged code changes, blockers</td><td>Drafts a daily or weekly update</td><td>Edits before posting</td></tr><tr><td><strong>Release notes draft</strong></td><td>Released change list</td><td>Groups changes into New / Improved / Fixed in customer language</td><td>Removes internal details</td></tr><tr><td><strong>Readiness check</strong></td><td>Release candidates</td><td>Evaluates the <a href="../04-release-management/change-readiness-gate-and-go-no-go.html">gate criteria</a> and lists the gaps</td><td>Makes the go/no-go call</td></tr><tr><td><strong>Dashboard refresh</strong></td><td>Tracker export</td><td>Rebuilds the data file and the static page</td><td>Spot-checks numbers; publishes</td></tr></tbody></table></div>
+<h2 id="2-package-each-workflow-as-a-reusable-skill">2. Package each workflow as a reusable "skill"</h2>
+<p>Each workflow is a short, version-controlled instruction file:</p>
+<pre><code class="lang-markdown">---
+name: weekly-status-draft
+description: Draft the weekly executive status from tracker data.
+  Use on Friday mornings. Not for incident updates.
+---
+1. Query open commitments for the current quarter (read-only).
+2. Compare them with last week&#x27;s snapshot; list status changes.
+3. Fill in the executive status template. Never invent risks, asks or numbers.
+4. Cite the source item for every claim.
+5. Output the draft only. Do not send it.</code></pre>
+<p>Every skill defines:</p>
+<ul><li>a <strong>trigger description</strong>: when to use it, and when <em>not</em> to</li><li><strong>inputs</strong> (query, date range, team)</li><li><strong>steps</strong>: a deterministic procedure</li><li>an <strong>output contract</strong>: the format, where it goes, and what "done" means</li></ul>
+<h2 id="3-interactive-vs-unattended-variants">3. Interactive vs. unattended variants</h2>
+<div class="table-wrap"><table><thead><tr><th>Variant</th><th>Behaviour</th></tr></thead><tbody><tr><td>Interactive</td><td>Can ask clarifying questions; shows output in the chat</td></tr><tr><td>Unattended (scheduled)</td><td>Takes every input from config; never asks; publishes and reports; fails loudly</td></tr></tbody></table></div>
+<p>Keeping two variants stops scheduled runs from hanging on a question nobody is there to answer.</p>
+<h2 id="4-the-action-item-extraction-rule-set">4. The action-item extraction rule set</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Rule</th></tr></thead><tbody><tr><td>Action</td><td>Starts with a verb; one deliverable</td></tr><tr><td>Owner</td><td>One named person or role</td></tr><tr><td>Due date</td><td>Explicit, or a default (e.g. +5 business days) flagged for confirmation</td></tr><tr><td>Evidence</td><td>A quote or link back to the source</td></tr></tbody></table></div>
+<p><strong>Don't extract</strong> decisions (they go to the <a href="../01-program-governance/decision-log-template.html">decision log</a>), FYIs, or vague intentions ("we should look into…").</p>
+<p>Review table, shown before anything is created <em>(fictional)</em>:</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Due</th><th>Create?</th></tr></thead><tbody><tr><td>1</td><td>Draft rollback runbook for v4.3</td><td>Eng lead</td><td>05-12</td><td>✅</td></tr><tr><td>2</td><td>Confirm UAT environment dates with the platform team</td><td>TPM</td><td>05-09</td><td>✅</td></tr><tr><td>3</td><td>"Look into performance"</td><td>?</td><td>?</td><td>❌ needs clarification</td></tr></tbody></table></div>
+<h2 id="5-guardrails-non-negotiable">5. Guardrails (non-negotiable)</h2>
+<ol><li><strong>Read-only by default.</strong> Write actions (creating tickets, posting messages) need explicit confirmation, or are limited to known destinations.</li><li><strong>Human in the loop</strong> for anything outward-facing and for any judgment call.</li><li><strong>Grounded output.</strong> Every generated claim links to its source record. No invented numbers.</li><li><strong>Deterministic where possible.</strong> Scripts count and filter; the AI writes the narrative.</li><li><strong>No secrets in prompts or skill files.</strong></li><li><strong>Data boundaries.</strong> The agent runs under the user's own permissions and access is never widened for it. Confidential data stays inside approved tools.</li><li><strong>Version the prompts</strong> like code, with reviews and a changelog.</li><li><strong>Auditability.</strong> Log what was generated, from which inputs, and who approved it.</li></ol>
+<h2 id="6-measuring-value">6. Measuring value</h2>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>How to measure</th></tr></thead><tbody><tr><td>Time saved</td><td>Report preparation time before vs. after (measure your own baseline)</td></tr><tr><td>Accuracy</td><td>Errors caught at human review, per report</td></tr><tr><td>Consistency</td><td>% of outputs that match the template</td></tr><tr><td>Adoption</td><td>People or teams using the workflow each week</td></tr></tbody></table></div></article>
+    <div class="prevnext"><a href="scheduled-alerting-pattern.html">← scheduled alerting pattern</a><a href="tracker-hygiene-checks.html">tracker hygiene checks →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/ai-assisted-pm-workflows.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-workflow-catalog">1. Workflow catalog</a><a href="#2-package-each-workflow-as-a-reusable-skill">2. Package each workflow as a reusable &quot;skill&quot;</a><a href="#3-interactive-vs-unattended-variants">3. Interactive vs. unattended variants</a><a href="#4-the-action-item-extraction-rule-set">4. The action-item extraction rule set</a><a href="#5-guardrails-non-negotiable">5. Guardrails (non-negotiable)</a><a href="#6-measuring-value">6. Measuring value</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

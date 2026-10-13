@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escalation Playbook · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html" aria-current="page"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../09-leadership/index.html">Leadership</a></div>
+    <article><h1 id="escalation-playbook">Escalation Playbook</h1>
+<p><strong>Skill:</strong> Leadership &amp; governance · <strong>Competency:</strong> Escalating early and constructively</p>
+<h2 id="1-escalation-is-a-tool-not-a-failure">1. Escalation is a tool, not a failure</h2>
+<p>Escalate when you need a decision or resource from above your level <strong>and</strong> the options get worse after a deadline. Escalating early, with options, protects commitments. Escalating late, with only problems, damages trust.</p>
+<h2 id="2-when-to-escalate">2. When to escalate</h2>
+<div class="table-wrap"><table><thead><tr><th>Trigger</th><th>Example</th></tr></thead><tbody><tr><td>A decision outside your authority</td><td>A scope vs. date trade-off</td></tr><tr><td>A high risk with no mitigation in the team's control</td><td>A <a href="../01-program-governance/raid-log-template.html">RAID</a> score of 15 or more</td></tr><tr><td>A dependency missed with no recovery plan</td><td>No committed date after 2 follow-ups</td></tr><tr><td>An SLO breach is likely or has happened, with no ETA</td><td>A P1 past target</td></tr><tr><td>Conflicting priorities between teams</td><td>Two teams need the same specialist</td></tr></tbody></table></div>
+<h2 id="3-levels-response-times-illustrative">3. Levels (response times illustrative)</h2>
+<div class="table-wrap"><table><thead><tr><th>Level</th><th>To</th><th>When</th><th>Expected response</th></tr></thead><tbody><tr><td>L0</td><td>Peer / dependency owner</td><td>First contact</td><td>1–2 business days</td></tr><tr><td>L1</td><td>Team leads / delivery lead</td><td>L0 unresolved, or a dependency at risk</td><td>1 business day</td></tr><tr><td>L2</td><td>Engineering / product manager</td><td>A milestone at risk</td><td>1 business day</td></tr><tr><td>L3</td><td>Director / sponsor / steering</td><td>A quarterly commitment or a customer at risk</td><td>Same day, or next steering if not critical</td></tr></tbody></table></div>
+<h2 id="4-the-escalation-message">4. The escalation message</h2>
+<p>Use <strong>SBAR</strong> (Situation, Background, Assessment, Recommendation). It's also known as SCQA (Situation, Complication, Question, Answer).</p>
+<pre><code>Subject: [Decision needed by &lt;date&gt;] &lt;short issue&gt;
+
+Situation:      &lt;one sentence: what&#x27;s happening&gt;
+Background:     &lt;context and what&#x27;s been tried&gt;
+Assessment:     &lt;impact on scope / time / cost / quality, and the cost of waiting&gt;
+Options:
+  A. &lt;option&gt;: pros / cons
+  B. &lt;option&gt;: pros / cons
+Recommendation: &lt;A or B, and why&gt;
+Ask:            &lt;the specific decision or resource, from whom, by when&gt;</code></pre>
+<blockquote><p><strong>Example (fictional):</strong> The SSO API isn't in staging yet (<strong>S</strong>). It was agreed for 05-01, and we've synced weekly since 04-10 (<strong>B</strong>). Each day of delay pushes the onboarding launch by a day, and after 05-08 it moves into next quarter (<strong>A</strong>). Please help prioritise the API with the identity team's manager this week, or approve descoping SSO from the first release (<strong>R</strong>).</p></blockquote>
+<h2 id="5-do-dont">5. Do / don't</h2>
+<div class="table-wrap"><table><thead><tr><th>Do</th><th>Don't</th></tr></thead><tbody><tr><td>Tell the person you're escalating past, <em>before</em> you do it</td><td>Blindside anyone</td></tr><tr><td>Bring options and a recommendation</td><td>Bring only problems</td></tr><tr><td>Use dates, data and links</td><td>Use adjectives and unproven urgency</td></tr><tr><td>Handle sensitive topics 1:1</td><td>Escalate in a group channel what should be a private conversation</td></tr><tr><td>Close the loop: record the outcome in the <a href="../01-program-governance/decision-log-template.html">decision log</a> and tell everyone affected</td><td>Leave escalations hanging</td></tr></tbody></table></div></article>
+    <div class="prevnext"><span></span><a href="cross-functional-collaboration-guide.html">cross functional collaboration guide →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/09-leadership/escalation-playbook.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-escalation-is-a-tool-not-a-failure">1. Escalation is a tool, not a failure</a><a href="#2-when-to-escalate">2. When to escalate</a><a href="#3-levels-response-times-illustrative">3. Levels (response times illustrative)</a><a href="#4-the-escalation-message">4. The escalation message</a><a href="#5-do-dont">5. Do / don&#x27;t</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

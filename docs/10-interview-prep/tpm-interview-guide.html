@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TPM / Program Manager Interview Guide · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html" aria-current="page"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../10-interview-prep/index.html">Interview Prep</a></div>
+    <article><h1 id="tpm-program-manager-interview-guide">TPM / Program Manager Interview Guide</h1>
+<h2 id="1-what-interviewers-evaluate">1. What interviewers evaluate</h2>
+<div class="table-wrap"><table><thead><tr><th>Dimension</th><th>What "strong" looks like</th></tr></thead><tbody><tr><td><strong>Program execution</strong></td><td>Breaks ambiguity into a plan; manages dependencies and risk; delivers</td></tr><tr><td><strong>Technical depth</strong></td><td>Explains system design trade-offs; credible with engineers; asks the right questions</td></tr><tr><td><strong>Stakeholder management</strong></td><td>Aligns competing priorities; communicates up, down and across</td></tr><tr><td><strong>Leadership &amp; influence</strong></td><td>Drives outcomes without authority; handles conflict</td></tr><tr><td><strong>Data &amp; judgment</strong></td><td>Uses metrics to decide; knows which ones can be gamed</td></tr><tr><td><strong>Communication</strong></td><td>Structured, concise, conclusion first</td></tr></tbody></table></div>
+<h2 id="2-common-question-types-and-answer-frameworks">2. Common question types and answer frameworks</h2>
+<h3 id="a-tell-me-about-a-program-you-led-end-to-end">a) "Tell me about a program you led end to end."</h3>
+<p>Use <strong>STAR+</strong>: Situation → Task → Actions (<em>your</em> actions, as "I", not "we") → Result (quantified) → <strong>Learning</strong>.<br>Relevant artifacts: <a href="../02-technical-program-management/program-charter-template.html">Program charter</a>, <a href="../01-program-governance/quarterly-commitment-tracking.html">Quarterly commitment tracking</a>.</p>
+<h3 id="b-a-critical-dependency-is-going-to-slip-what-do-you-do">b) "A critical dependency is going to slip. What do you do?"</h3>
+<ol><li>Quantify the impact on the critical path.</li><li>Explore options: re-sequence, stub or mock, descope, add resources, accept the slip.</li><li>Agree a recovery plan with the provider.</li><li>Escalate early, with options and a recommendation.</li><li>Communicate the change and update the plan and RAID log.</li></ol>
+<p>Relevant artifacts: <a href="../02-technical-program-management/cross-team-dependency-management.html">Dependency management</a>, <a href="../09-leadership/escalation-playbook.html">Escalation playbook</a>.</p>
+<h3 id="c-how-do-you-decide-whether-a-release-is-ready">c) "How do you decide whether a release is ready?"</h3>
+<p>Criteria over opinion: a gate with mandatory criteria and evidence, operational readiness, a tested rollback plan, and a go/no-go with written decisions.<br>Relevant artifacts: <a href="../04-release-management/change-readiness-gate-and-go-no-go.html">Change gate &amp; go/no-go</a>, <a href="../04-release-management/rollback-planning-template.html">Rollback plan</a>.</p>
+<h3 id="d-production-is-down-walk-me-through-your-role">d) "Production is down. Walk me through your role."</h3>
+<p>Assign the roles (IC, tech lead, comms lead) → communicate on a fixed cadence → mitigate before root-causing → blameless review → track actions to closure.<br>Relevant artifacts: <a href="../05-quality-and-reliability/incident-communication-playbook.html">Incident communication</a>, <a href="../05-quality-and-reliability/post-incident-review-template.html">Post-incident review</a>.</p>
+<h3 id="e-which-metrics-would-you-use-to-measure-program-health">e) "Which metrics would you use to measure program health?"</h3>
+<p>Use balanced pairs: flow (cycle time, throughput), quality (escaped defects, change failure rate), predictability (say/do, commitment delivery %), plus counter-metrics. Never rank individuals.<br>Relevant artifact: <a href="../07-reporting-and-metrics/delivery-metrics-catalog.html">Metrics catalog</a>.</p>
+<h3 id="f-two-senior-stakeholders-want-conflicting-things">f) "Two senior stakeholders want conflicting things."</h3>
+<p>Clarify each one's underlying goal → find shared outcomes → make the trade-off explicit with data → agree who has the decision right → record the decision → communicate it.<br>Relevant artifacts: <a href="../06-stakeholder-management/stakeholder-map-and-raci.html">Stakeholder map &amp; RACI</a>, <a href="../01-program-governance/decision-log-template.html">Decision log</a>.</p>
+<h3 id="g-how-have-you-used-automation-or-ai-to-scale-yourself">g) "How have you used automation or AI to scale yourself?"</h3>
+<p>Describe the problem, the pattern (scheduled job or agent workflow), the guardrails (read-only access, human in the loop) and the measured result.<br>Relevant artifacts: <a href="../08-automation/scheduled-alerting-pattern.html">Scheduled alerting</a>, <a href="../08-automation/ai-assisted-pm-workflows.html">AI-assisted PM workflows</a>.</p>
+<h3 id="h-system-design-for-tpms">h) System design for TPMs</h3>
+<p>You aren't expected to design like a staff engineer. You <em>are</em> expected to:</p>
+<ul><li>clarify requirements and non-functional needs (scale, latency, availability)</li><li>sketch the main components and data flow</li><li>identify risks: single points of failure, data consistency, migration, rollout</li><li>propose a phased delivery plan with milestones and rollback</li></ul>
+<h2 id="3-questions-to-ask-the-interviewer">3. Questions to ask the interviewer</h2>
+<ul><li>How are program priorities set, and who holds the decision rights?</li><li>What does a TPM own here that engineering managers don't?</li><li>How is TPM success measured in the first 6 months?</li><li>What's the hardest cross-team dependency right now?</li></ul>
+<h2 id="4-preparation-checklist">4. Preparation checklist</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>8–10 anonymised stories in the <a href="star-story-bank-template.html">STAR story bank</a>, covering every competency</li><li><span class="box" aria-hidden="true">☐</span>Each story has a quantified result. Use ranges or percentages if exact figures are confidential.</li><li><span class="box" aria-hidden="true">☐</span>A 2-minute "walk me through your background" pitch</li><li><span class="box" aria-hidden="true">☐</span>One system you can explain in depth: architecture, trade-offs, failure modes</li><li><span class="box" aria-hidden="true">☐</span><strong>Confidentiality check:</strong> no employer-confidential names, numbers or details in any story</li></ul></article>
+    <div class="prevnext"><span></span><a href="star-story-bank-template.html">star story bank template →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/10-interview-prep/tpm-interview-guide.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-what-interviewers-evaluate">1. What interviewers evaluate</a><a href="#2-common-question-types-and-answer-frameworks">2. Common question types and answer frameworks</a><a href="#3-questions-to-ask-the-interviewer">3. Questions to ask the interviewer</a><a href="#4-preparation-checklist">4. Preparation checklist</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

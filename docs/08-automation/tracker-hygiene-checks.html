@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue Tracker Hygiene Checks · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html" aria-current="page"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../08-automation/index.html">Automation</a></div>
+    <article><h1 id="issue-tracker-hygiene-checks">Issue Tracker Hygiene Checks</h1>
+<p><strong>Skill:</strong> Data quality for delivery reporting · <strong>Competency:</strong> Keeping the data behind reports and automation trustworthy</p>
+<p>Reports and automation are only as good as the data underneath them. Run these checks weekly, ideally automatically, and send the results to item owners.</p>
+<div class="table-wrap"><table><thead><tr><th>Check</th><th>Rule (example)</th><th>Why it matters</th></tr></thead><tbody><tr><td>Missing owner</td><td>Active item with no assignee</td><td>Nobody is accountable</td></tr><tr><td>Missing priority</td><td>Defect without a priority</td><td>SLOs can't be calculated</td></tr><tr><td>Missing target date</td><td>Release-bound item with no planned date</td><td>Readiness gates can't evaluate it</td></tr><tr><td>Stale item</td><td>"In progress" with no update for 14+ days</td><td>A hidden blocker or abandoned work</td></tr><tr><td>Status mismatch</td><td>Marked done, but linked defects are still open</td><td>False reporting</td></tr><tr><td>Done without release</td><td>Marked done, but no release date or version</td><td>Inflated delivery numbers</td></tr><tr><td>Orphan</td><td>Story not linked to an epic or goal</td><td>Untraceable work</td></tr><tr><td>Missing component</td><td>No product/component field</td><td>Breaks per-area reporting</td></tr><tr><td>Date drift</td><td>Target date changed 3+ times</td><td>A signal about planning quality</td></tr></tbody></table></div>
+<h2 id="output-format">Output format</h2>
+<p>Group findings <strong>by owner</strong>, so that each person gets one list of their own fixes:</p>
+<pre><code>@Owner: 3 items need attention
+• 2 stale &quot;In progress&quot; items (no update in 14+ days)
+• 1 defect missing a priority</code></pre>
+<h2 id="tips">Tips</h2>
+<ul><li>Track a hygiene score (% of items passing every check) over time, and celebrate improvement.</li><li>Fix the process upstream with required fields and workflow validators, rather than chasing the same gaps every week.</li><li>Show hygiene exceptions on dashboards instead of quietly excluding them (see the <a href="../07-reporting-and-metrics/dashboard-design-guide.html">dashboard guide</a>).</li></ul></article>
+    <div class="prevnext"><a href="ai-assisted-pm-workflows.html">← ai assisted pm workflows</a><span></span></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/tracker-hygiene-checks.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

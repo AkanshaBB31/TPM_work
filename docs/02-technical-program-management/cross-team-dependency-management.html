@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-Team Dependency Management · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html" aria-current="page"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../02-technical-program-management/index.html">Technical Program Management</a></div>
+    <article><h1 id="cross-team-dependency-management">Cross-Team Dependency Management</h1>
+<p><strong>Skill:</strong> Technical program management · <strong>Competency:</strong> Delivering outcomes that span multiple teams, systems and release cycles</p>
+<p>Most program slips are dependency slips. This playbook makes dependencies explicit, dated and owned.</p>
+<h2 id="1-dependency-types">1. Dependency types</h2>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Example (fictional)</th><th>Typical risk</th></tr></thead><tbody><tr><td><strong>Technical / API</strong></td><td>Checkout needs a new endpoint from the Identity service</td><td>Contract churn, late delivery</td></tr><tr><td><strong>Data</strong></td><td>Analytics needs a new event schema</td><td>Schema mismatch</td></tr><tr><td><strong>Environment</strong></td><td>Integration testing needs a shared staging slot</td><td>Contention</td></tr><tr><td><strong>Release</strong></td><td>Mobile release must follow a backend release</td><td>Version incompatibility</td></tr><tr><td><strong>Vendor</strong></td><td>Payment provider must enable a feature</td><td>No control over the timeline</td></tr><tr><td><strong>People / skills</strong></td><td>Only one engineer knows the legacy module</td><td>Single point of failure</td></tr></tbody></table></div>
+<h2 id="2-dependency-board">2. Dependency board</h2>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Consumer team</th><th>Provider team</th><th>What's needed</th><th>Need-by</th><th>Committed date</th><th>Gap (days)</th><th>Status</th><th>Contract agreed?</th></tr></thead><tbody><tr><td>DEP-01</td><td>Checkout</td><td>Identity</td><td>SSO scopes API</td><td>05-01</td><td>05-08</td><td><strong>−7</strong></td><td>🟠 At risk</td><td>✅</td></tr><tr><td>DEP-02</td><td>Analytics</td><td>Checkout</td><td><code>order_completed</code> v2 event</td><td>05-15</td><td>05-10</td><td>+5</td><td>🟢</td><td>✅</td></tr><tr><td>DEP-03</td><td>Mobile</td><td>Platform</td><td>Feature flag SDK upgrade</td><td>06-01</td><td>—</td><td>n/a</td><td>🔴 No commitment</td><td>❌</td></tr></tbody></table></div>
+<p><strong>Rules</strong></p>
+<ul><li>A gap below zero, or a blank committed date, automatically creates a RAID risk.</li><li>Every dependency has a named owner on <strong>both</strong> sides.</li></ul>
+<h2 id="3-mapping-the-critical-path">3. Mapping the critical path</h2>
+<ol><li>List the milestones and the work packages behind them.</li><li>Draw the dependency arrows (provider → consumer).</li><li>Find the longest chain. That's the critical path.</li><li>Put the most management attention on items that are <strong>on the critical path and owned outside your team</strong>.</li></ol>
+<pre><code>[Identity API]──▶[Checkout integration]──▶[E2E test]──▶[Launch]
+       ▲                                       ▲
+[Contract sign-off]               [Staging slot booked]</code></pre>
+<h2 id="4-de-risking-techniques">4. De-risking techniques</h2>
+<div class="table-wrap"><table><thead><tr><th>Technique</th><th>How it helps</th></tr></thead><tbody><tr><td><strong>Contract-first</strong></td><td>Agree the API/event schema early; both sides build against it</td></tr><tr><td><strong>Stubs &amp; mocks</strong></td><td>The consumer isn't blocked by the provider's timeline</td></tr><tr><td><strong>Feature flags</strong></td><td>Decouple deploy from release; ship dark</td></tr><tr><td><strong>Version compatibility</strong></td><td>Backward-compatible changes with expand/contract migrations</td></tr><tr><td><strong>Integration milestones</strong></td><td>Schedule an early "first call works" milestone, not just the final date</td></tr><tr><td><strong>Buffer on the critical path</strong></td><td>Explicit buffer for external dependencies only</td></tr></tbody></table></div>
+<h2 id="5-cadence">5. Cadence</h2>
+<ul><li><strong>Weekly 15-minute dependency sync:</strong> active dependencies only, sorted by gap.</li><li><strong>Escalate</strong> when a dependency is on the critical path with a negative gap and no recovery plan (see the <a href="../09-leadership/escalation-playbook.html">escalation playbook</a>).</li></ul>
+<h2 id="6-health-metrics">6. Health metrics</h2>
+<ul><li>% of dependencies with a committed date</li><li>% with an agreed contract</li><li>Count of dependencies with a negative gap</li><li>Average slip of dependency dates per quarter</li></ul></article>
+    <div class="prevnext"><a href="program-charter-template.html">← program charter template</a><a href="operational-readiness-review.html">operational readiness review →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/02-technical-program-management/cross-team-dependency-management.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-dependency-types">1. Dependency types</a><a href="#2-dependency-board">2. Dependency board</a><a href="#3-mapping-the-critical-path">3. Mapping the critical path</a><a href="#4-de-risking-techniques">4. De-risking techniques</a><a href="#5-cadence">5. Cadence</a><a href="#6-health-metrics">6. Health metrics</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

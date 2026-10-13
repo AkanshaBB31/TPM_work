@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post-Incident Review Template (Blameless) · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html" aria-current="page"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../05-quality-and-reliability/index.html">Quality &amp; Reliability</a></div>
+    <article><h1 id="post-incident-review-template-blameless">Post-Incident Review Template (Blameless)</h1>
+<p><strong>Skill:</strong> Incident management · <strong>Competency:</strong> Building a learning culture and reducing operational risk</p>
+<p>Hold the review within 3–5 business days of resolution. The aim is to improve <strong>systems and conditions</strong>, not to assign blame.</p>
+<h2 id="summary">Summary</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Example (fictional)</th></tr></thead><tbody><tr><td>Incident</td><td>EX-INC-014: checkout errors for some users</td></tr><tr><td>Severity</td><td>SEV-2</td></tr><tr><td>Duration</td><td>47 min (detected 14:03, resolved 14:50 UTC)</td></tr><tr><td>Customer impact</td><td>About 8% of checkout attempts failed</td></tr><tr><td>Detection</td><td>Error-rate alert</td></tr><tr><td>Review facilitator</td><td>&lt;role&gt;</td></tr></tbody></table></div>
+<h2 id="timeline">Timeline</h2>
+<div class="table-wrap"><table><thead><tr><th>Time (UTC)</th><th>Event</th></tr></thead><tbody><tr><td>13:58</td><td>Config change deployed</td></tr><tr><td>14:03</td><td>Error-rate alert fired (<strong>detection</strong>)</td></tr><tr><td>14:08</td><td>Incident declared; incident commander assigned (<strong>escalation</strong>)</td></tr><tr><td>14:20</td><td>Cause identified</td></tr><tr><td>14:41</td><td>Config reverted (<strong>mitigation</strong>)</td></tr><tr><td>14:50</td><td>Error rate back to baseline (<strong>resolved</strong>)</td></tr></tbody></table></div>
+<h2 id="contributing-factors">Contributing factors</h2>
+<p>Use the <em>5 Whys</em> or a fishbone diagram. Ask <strong>"What made this possible?"</strong>, not "Who did this?"</p>
+<h2 id="what-went-well-what-was-hard">What went well / what was hard</h2>
+<p>-</p>
+<h2 id="actions">Actions</h2>
+<div class="table-wrap"><table><thead><tr><th>Action</th><th>Type</th><th>Owner</th><th>Due</th><th>Tracked in</th></tr></thead><tbody><tr><td>Add config validation to the pipeline</td><td>Prevent</td><td></td><td></td><td></td></tr><tr><td>Alert on checkout success rate, not just errors</td><td>Detect</td><td></td><td></td><td></td></tr><tr><td>Put risky configs behind feature flags</td><td>Mitigate</td><td></td><td></td><td></td></tr></tbody></table></div>
+<p>Track the actions in the backlog and review completion at the monthly operations review.</p>
+<h2 id="monthly-executive-incident-summary">Monthly executive incident summary</h2>
+<div class="table-wrap"><table><thead><tr><th>Month</th><th>SEV-1</th><th>SEV-2</th><th>MTTD</th><th>MTTR</th><th>Repeat incidents</th><th>Overdue actions</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></article>
+    <div class="prevnext"><a href="defect-triage-playbook.html">← defect triage playbook</a><a href="incident-communication-playbook.html">incident communication playbook →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/post-incident-review-template.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#summary">Summary</a><a href="#timeline">Timeline</a><a href="#contributing-factors">Contributing factors</a><a href="#what-went-well-what-was-hard">What went well / what was hard</a><a href="#actions">Actions</a><a href="#monthly-executive-incident-summary">Monthly executive incident summary</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

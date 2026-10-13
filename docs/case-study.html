@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout Modernization Case Study</title>
+<meta name="description" content="A fictional end-to-end technical program management case study: 26 weeks from charter to close-out, applying the frameworks in the TPM_work portfolio.">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --surface-2: #f3f2ee;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --accent: #2a78d6;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --good: #0ca30c;
+    --good-text: #006300;
+    --warning: #fab219;
+    --serious: #ec835a;
+    --critical: #d03b3b;
+    --chip-bg: #e8f0fb;
+    --chip-ink: #184f95;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232321;
+      --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+      --accent: #3987e5; --series-1: #3987e5; --series-2: #d95926;
+      --good-text: #0ca30c; --chip-bg: #1c2a3d; --chip-ink: #9ec5f4;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232321;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --accent: #3987e5; --series-1: #3987e5; --series-2: #d95926;
+    --good-text: #0ca30c; --chip-bg: #1c2a3d; --chip-ink: #9ec5f4;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  /* top bar */
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--page) 88%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .topbar .wrap { display: flex; align-items: center; gap: 16px; height: 52px; }
+  .brand { font-weight: 650; font-size: 15px; white-space: nowrap; }
+  .nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { color: var(--ink-2); text-decoration: none; font-size: 13px; padding: 6px 10px; border-radius: 8px; white-space: nowrap; }
+  .nav a:hover { background: var(--surface-2); color: var(--ink); }
+  .theme-btn { border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); border-radius: 8px;
+    padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap; }
+
+  /* hero */
+  header.hero { padding: 56px 0 32px; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: .02em;
+    color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 16px 0 12px; letter-spacing: -0.02em; }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 720px; margin: 0; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 28px; }
+  .meta div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .meta dt { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .meta dd { margin: 2px 0 0; font-weight: 550; font-size: 15px; }
+
+  /* sections */
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  .eyebrow { font-size: 12px; font-weight: 650; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); margin: 6px 0 8px; letter-spacing: -0.01em; }
+  h3 { font-size: 17px; margin: 0 0 8px; }
+  .sub { color: var(--ink-2); margin: 0 0 20px; max-width: 760px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .stack > * + * { margin-top: 16px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 18px; }
+  .chip { font-size: 12.5px; font-weight: 550; text-decoration: none; color: var(--chip-ink); background: var(--chip-bg);
+    border-radius: 999px; padding: 4px 10px; }
+  .chip:hover { text-decoration: underline; }
+  .chip::before { content: "↗ "; opacity: .7; }
+
+  /* KPI tiles */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .kpi .label { font-size: 13px; color: var(--ink-2); }
+  .kpi .value { font-size: 30px; font-weight: 650; letter-spacing: -0.02em; margin-top: 4px; }
+  .kpi .delta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .kpi .delta b { color: var(--good-text); font-weight: 600; }
+
+  /* status pills (icon + label, never colour alone) */
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 550; white-space: nowrap; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot.good { background: var(--good); } .dot.warn { background: var(--warning); }
+  .dot.serious { background: var(--serious); } .dot.crit { background: var(--critical); }
+
+  /* timeline */
+  .phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .phase { text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px; transition: border-color .15s; }
+  .phase:hover { border-color: var(--accent); }
+  .phase .wk { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .phase .nm { font-weight: 600; font-size: 14px; }
+  .bar-track { height: 6px; background: var(--surface-2); border-radius: 3px; margin-top: 8px; position: relative; overflow: hidden; }
+  .bar-fill { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 3px; }
+
+  /* tables */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  td:first-child { white-space: nowrap; }
+  .lessons td:first-child { white-space: normal; }
+
+  /* quote */
+  blockquote { margin: 0; padding: 16px 18px; border-left: 3px solid var(--accent); background: var(--surface-2);
+    border-radius: 0 12px 12px 0; color: var(--ink); font-size: 15px; }
+  blockquote b { color: var(--accent); }
+
+  /* charts */
+  .chart { position: relative; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart-title { font-weight: 600; margin: 0; }
+  .chart-sub { font-size: 13px; color: var(--ink-2); margin: 2px 0 10px; }
+  .legend { display: flex; gap: 16px; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; }
+  .tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12); border-radius: 8px; padding: 8px 10px; font-size: 13px; line-height: 1.45;
+    opacity: 0; transition: opacity .1s; white-space: nowrap; z-index: 5; }
+  .tip b { font-weight: 650; }
+  details.data { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
+  details.data summary { cursor: pointer; }
+  details.data table { margin-top: 8px; font-size: 13px; }
+
+  /* gate */
+  .gate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .gate .card { padding: 14px; }
+  .gate .n { font-size: 32px; font-weight: 650; }
+
+  /* incident timeline */
+  .tl { list-style: none; margin: 0; padding: 0; position: relative; }
+  .tl::before { content: ""; position: absolute; left: 58px; top: 6px; bottom: 6px; width: 2px; background: var(--grid); }
+  .tl li { display: grid; grid-template-columns: 50px 18px 1fr; gap: 8px; align-items: start; padding: 6px 0; }
+  .tl time { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--muted); padding-top: 1px; }
+  .tl .node { width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2px solid var(--axis); margin-top: 5px; position: relative; z-index: 1; }
+  .tl .node.hot { border-color: var(--critical); background: var(--critical); }
+  .tl .node.ok { border-color: var(--good); background: var(--good); }
+  .tl .node.key { border-color: var(--accent); background: var(--accent); }
+
+  .lessons td:first-child { width: 50%; }
+  footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--ink-2); font-size: 14px; }
+
+  @media (max-width: 560px) {
+    header.hero { padding-top: 36px; }
+    .gate { grid-template-columns: 1fr; }
+    .brand { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html" style="color:inherit;text-decoration:none">← TPM_work portfolio</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#outcomes">Outcomes</a><a href="#timeline">Timeline</a><a href="#initiation">Initiation</a>
+      <a href="#planning">Planning</a><a href="#execution">Execution</a><a href="#quality">Quality</a>
+      <a href="#release">Release</a><a href="#incident">Incident</a><a href="#lessons">Lessons</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐ Theme</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+<header class="hero">
+  <span class="badge">⚠︎ Fictional case study · all names and numbers invented</span>
+  <h1>Checkout Modernization</h1>
+  <p class="lede">How one 26-week, five-team program went from a slow, fragile monthly-release checkout to weekly, measurably safer releases, using the governance, release and automation frameworks in this portfolio.</p>
+  <dl class="meta">
+    <div><dt>Organisation</dt><dd>Example Co. (online retail)</dd></div>
+    <div><dt>Duration</dt><dd>26 weeks · Jan – Jun 2026</dd></div>
+    <div><dt>Teams</dt><dd>5 teams · 21 people</dd></div>
+    <div><dt>My role</dt><dd>Technical Program Manager</dd></div>
+  </dl>
+</header>
+
+<!-- OUTCOMES -->
+<section id="outcomes">
+  <div class="eyebrow">Results at week 26</div>
+  <h2>Every charter target met</h2>
+  <p class="sub">The outcomes were agreed in the charter at week 2 and measured at close-out.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="label">Checkout completion</div><div class="value">71%</div><div class="delta">from 61% · target ≥ 70% · <b>✓ met</b></div></div>
+    <div class="kpi"><div class="label">p95 checkout latency</div><div class="value">1.2 s</div><div class="delta">from 2.8 s · target &lt; 1.5 s · <b>✓ met</b></div></div>
+    <div class="kpi"><div class="label">Change failure rate</div><div class="value">8%</div><div class="delta">from 24% · target &lt; 10% · <b>✓ met</b></div></div>
+    <div class="kpi"><div class="label">Deployment frequency</div><div class="value">~2 / wk</div><div class="delta">from monthly · target weekly · <b>✓ met</b></div></div>
+    <div class="kpi"><div class="label">Defect SLO attainment</div><div class="value">93%</div><div class="delta">from 78% · target ≥ 90% · <b>✓ met</b></div></div>
+    <div class="kpi"><div class="label">Open P1/P2 defects</div><div class="value">4</div><div class="delta">from 18 · <b>−78%</b></div></div>
+    <div class="kpi"><div class="label">Quarterly commitments</div><div class="value">16 / 18</div><div class="delta">Q1 7/8 · Q2 9/10 (1 deferred by decision)</div></div>
+    <div class="kpi"><div class="label">Weekly reporting effort</div><div class="value">~45 min</div><div class="delta">from ~3 h · automated drafts</div></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="eyebrow">26-week arc</div>
+  <h2>Program timeline</h2>
+  <p class="sub">Select a phase to jump to it.</p>
+  <div class="phases" id="phases"></div>
+</section>
+
+<!-- INITIATION -->
+<section id="initiation">
+  <div class="eyebrow">Weeks 1–2 · Initiation</div>
+  <h2>Agree the outcomes before the work</h2>
+  <div class="chips">
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/02-technical-program-management/program-charter-template.md">Program charter</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/06-stakeholder-management/stakeholder-map-and-raci.md">Stakeholder map &amp; RACI</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/06-stakeholder-management/communication-plan-template.md">Communication plan</a>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>The problem</h3>
+      <p style="margin:0;color:var(--ink-2)">Checkout was a module inside a legacy monolith. It was slow (2.8 s p95), fragile (24% of changes failed) and released only once a month. 18 P1/P2 defects were open.</p>
+      <h3 style="margin-top:16px">Scope</h3>
+      <p style="margin:0;color:var(--ink-2)"><b style="color:var(--ink)">In:</b> new checkout UI, checkout service, Kestrel Pay integration, saved carts.<br><b style="color:var(--ink)">Out:</b> loyalty points, international tax.</p>
+    </div>
+    <div class="card">
+      <h3>Stakeholder move that mattered</h3>
+      <p style="margin:0 0 10px;color:var(--ink-2)">The Head of Support was <i>Concerned</i>, because the last checkout change had caused a spike in tickets.</p>
+      <div class="table-wrap"><table>
+        <tr><th>Action</th><th>Result</th></tr>
+        <tr><td>Moved to "manage closely"</td><td rowspan="3">Stance moved from <b>Concerned → Supportive</b> by week 8</td></tr>
+        <tr><td>Invited to daily defect triage</td></tr>
+        <tr><td>Weekly automated SLO digest</td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANNING -->
+<section id="planning">
+  <div class="eyebrow">Weeks 3–4 · Planning</div>
+  <h2>Ready requirements, visible dependencies</h2>
+  <div class="chips">
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/03-agile-delivery/definition-of-ready-and-backlog-decomposition.md">Definition of Ready</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/02-technical-program-management/cross-team-dependency-management.md">Dependency board</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/raid-log-template.md">RAID log</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/quarterly-commitment-tracking.md">Quarterly commitments</a>
+  </div>
+  <div class="grid-3" style="margin-bottom:16px">
+    <div class="card"><div class="label" style="color:var(--ink-2);font-size:13px">PRD readiness review</div><div style="font-size:28px;font-weight:650">7 gaps</div><div style="font-size:13px;color:var(--muted)">including a missing latency baseline, card-data security requirements and declined-payment states · closed in 6 days</div></div>
+    <div class="card"><div class="label" style="color:var(--ink-2);font-size:13px">Backlog</div><div style="font-size:28px;font-weight:650">5 epics · 41 stories</div><div style="font-size:13px;color:var(--muted)">sequenced so high-risk work (API and vendor integration) came first</div></div>
+    <div class="card"><div class="label" style="color:var(--ink-2);font-size:13px">Commitments baselined</div><div style="font-size:28px;font-weight:650">8 + 10</div><div style="font-size:13px;color:var(--muted)">Q1 and Q2, locked on day 1 of each quarter</div></div>
+  </div>
+  <div class="stack">
+    <div>
+      <h3>Dependency board (week 4)</h3>
+      <div class="table-wrap"><table>
+        <tr><th>ID</th><th>Provider</th><th>Need</th><th>Need-by</th><th>Committed</th><th>Gap</th><th>Status</th></tr>
+        <tr><td>DEP-01</td><td>Identity team</td><td>Session token API</td><td>06 Mar</td><td>13 Mar</td><td class="num">−7 d</td><td><span class="pill"><span class="dot serious"></span>At risk</span></td></tr>
+        <tr><td>DEP-02</td><td>Kestrel Pay</td><td>Stable sandbox with tokenisation</td><td>20 Feb</td><td>"ASAP"</td><td class="num">n/a</td><td><span class="pill"><span class="dot crit"></span>No commitment</span></td></tr>
+        <tr><td>DEP-03</td><td>Platform</td><td>Feature-flag service upgrade</td><td>24 Apr</td><td>17 Apr</td><td class="num">+7 d</td><td><span class="pill"><span class="dot good"></span>On track</span></td></tr>
+      </table></div>
+    </div>
+    <div>
+      <h3>Top risks</h3>
+      <div class="table-wrap"><table>
+        <tr><th>ID</th><th>Risk</th><th>P × I</th><th>Response</th></tr>
+        <tr><td>R-01</td><td>Vendor sandbox instability stalls integration testing</td><td><span class="pill"><span class="dot crit"></span>16 · High</span></td><td>Contract stub; escalate for a sandbox SLA</td></tr>
+        <tr><td>R-02</td><td>Legacy cart data doesn't map cleanly to the new model</td><td><span class="pill"><span class="dot serious"></span>12 · Medium</span></td><td>Dry-run migration every sprint</td></tr>
+        <tr><td>R-03</td><td>Shared SRE capacity pulled into other incidents</td><td><span class="pill"><span class="dot serious"></span>9 · Medium</span></td><td>Accept; book SRE time for launch weeks</td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTION -->
+<section id="execution">
+  <div class="eyebrow">Weeks 5–22 · Execution</div>
+  <h2>A dip, an escalation, a recovery</h2>
+  <div class="chips">
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/03-agile-delivery/sprint-reporting-and-forecasting.md">Sprint reporting</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/09-leadership/escalation-playbook.md">Escalation playbook</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/decision-log-template.md">Decision log</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/07-reporting-and-metrics/executive-status-report-template.md">Executive status</a>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <p class="chart-title">Sprint 4 dropped to 68% say/do, then predictability recovered to more than 92%</p>
+    <p class="chart-sub">Story points committed vs completed, by sprint</p>
+    <div class="legend"><span><i class="swatch" style="background:var(--series-1)"></i>Committed</span><span><i class="swatch" style="background:var(--series-2)"></i>Completed</span></div>
+    <div class="chart" id="velocityChart"></div>
+    <details class="data"><summary>Show data table</summary><div class="table-wrap"><table id="velocityTable"></table></div></details>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>The escalation (SBAR)</h3>
+      <blockquote>
+        <b>S</b> The vendor sandbox has been unavailable for 6 of the last 10 days.<br>
+        <b>B</b> 4 vendor tickets since 20 Feb, weekly syncs, no SLA on the sandbox.<br>
+        <b>A</b> Each further week moves feature-complete by about a week and puts the June launch at risk.<br>
+        <b>R</b> Approve a contract stub this sprint and a sandbox-SLA clause at renewal. Decision needed by 20 Mar.
+      </blockquote>
+      <p style="font-size:13px;color:var(--muted);margin:10px 0 0">Decision made within 48 hours.</p>
+    </div>
+    <div class="card">
+      <h3>Decisions logged</h3>
+      <div class="table-wrap"><table>
+        <tr><th>ID</th><th>Decision</th></tr>
+        <tr><td>DEC-003</td><td>Release behind feature flags: 5% → 25% → 100%</td></tr>
+        <tr><td>DEC-004</td><td>Build a vendor contract stub; add a sandbox SLA to the renewal</td></tr>
+        <tr><td>DEC-006</td><td>Defer "Pay Later" to Q3 to protect the launch date</td></tr>
+      </table></div>
+      <h3 style="margin-top:16px">Executive status · week 12</h3>
+      <p style="margin:0;font-size:14px"><span class="pill"><span class="dot warn"></span>Amber</span> <span style="color:var(--ink-2)">(was Green). Feature-complete moves from 15 May to 22 May; the 5 June launch is held using buffer. <b style="color:var(--ink)">Ask:</b> approve deferring Pay Later.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY -->
+<section id="quality">
+  <div class="eyebrow">Throughout · Quality governance</div>
+  <h2>From chasing defects to managing them by SLO</h2>
+  <div class="chips">
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/defect-slo-framework.md">Defect SLO framework</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/defect-triage-playbook.md">Triage playbook</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/scheduled-alerting-pattern.md">Scheduled alerting</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/08-automation/tracker-hygiene-checks.md">Tracker hygiene</a>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <p class="chart-title">SLO attainment crossed the 90% target at week 18 and held</p>
+      <p class="chart-sub">Defect SLO attainment, % (Met ÷ Met + Breached)</p>
+      <div class="chart" id="sloChart"></div>
+      <details class="data"><summary>Show data table</summary><div class="table-wrap"><table id="sloTable"></table></div></details>
+    </div>
+    <div class="card stack">
+      <div><h3>What changed</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--ink-2)">
+          <li>SLO targets published at week 3</li>
+          <li>Triage moved from ad hoc to <b style="color:var(--ink)">daily 15 minutes plus a weekly ageing review</b></li>
+          <li>An automated <b style="color:var(--ink)">daily SLO digest</b>, grouped by owner, replaced manual chasing</li>
+          <li>Weekly tracker hygiene checks made the dashboards trustworthy</li>
+        </ul>
+      </div>
+      <div class="grid-2" style="gap:10px">
+        <div class="kpi"><div class="label">Tracker hygiene</div><div class="value">94%</div><div class="delta">from 71%</div></div>
+        <div class="kpi"><div class="label">Open P1/P2</div><div class="value">4</div><div class="delta">from 18</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELEASE -->
+<section id="release">
+  <div class="eyebrow">Weeks 21–24 · Release</div>
+  <h2>Ready by criteria, not by confidence</h2>
+  <div class="chips">
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/02-technical-program-management/operational-readiness-review.md">Operational readiness review</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/change-readiness-gate-and-go-no-go.md">Change gate &amp; go/no-go</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/release-readiness-checklist.md">Readiness checklist</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/04-release-management/rollback-planning-template.md">Rollback plan</a>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>The ORR found 2 gaps, both closed</h3>
+      <ol style="margin:0;padding-left:18px;color:var(--ink-2)">
+        <li>There was <b style="color:var(--ink)">no alert on payment success rate</b>, only on HTTP errors. Added. <i>(This alert caught the incident later.)</i></li>
+        <li>The load test only reached 1.2× peak. Re-run at <b style="color:var(--ink)">2×</b>, it exposed a connection-pool limit, which was fixed.</li>
+      </ol>
+      <h3 style="margin-top:16px">Go/no-go · 4 June</h3>
+      <p style="margin:0;color:var(--ink-2)"><span class="pill"><span class="dot good"></span><b style="color:var(--ink)">Go with conditions</b></span>: phased rollout via flags, the payment-success alert live, and flag rollback rehearsed (4 min).</p>
+    </div>
+    <div class="card">
+      <h3>Gate results at T-3 · 14 items</h3>
+      <div class="gate">
+        <div class="card"><span class="pill"><span class="dot good"></span>Ready</span><div class="n">11</div><div style="font-size:13px;color:var(--muted)">consent agenda</div></div>
+        <div class="card"><span class="pill"><span class="dot warn"></span>At risk</span><div class="n">2</div><div style="font-size:13px;color:var(--muted)">missing regression runs; fixed by T-1</div></div>
+        <div class="card"><span class="pill"><span class="dot crit"></span>Not ready</span><div class="n">1</div><div style="font-size:13px;color:var(--muted)">gift-card split payment, deferred to v5.1</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCIDENT -->
+<section id="incident">
+  <div class="eyebrow">Week 23 · Incident</div>
+  <h2>Detected in 3 minutes, resolved in 38</h2>
+  <p class="sub">At 25% rollout, 3.1% of card payments for one card network failed under the lunchtime peak.</p>
+  <div class="chips">
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/incident-communication-playbook.md">Incident communication</a>
+    <a class="chip" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/post-incident-review-template.md">Post-incident review</a>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Timeline · 11 June (SEV-2)</h3>
+      <ol class="tl">
+        <li><time>12:41</time><span class="node"></span><span>Lunchtime traffic peak</span></li>
+        <li><time>12:44</time><span class="node hot"></span><span><b>Payment-success alert fires</b> (added by the ORR)</span></li>
+        <li><time>12:47</time><span class="node key"></span><span>SEV-2 declared; I take the comms lead role; first update posted</span></li>
+        <li><time>12:58</time><span class="node"></span><span>Cause narrowed to a 2 s vendor timeout that was too low under peak</span></li>
+        <li><time>13:13</time><span class="node key"></span><span>Rollout flag turned off; traffic back on the legacy path</span></li>
+        <li><time>13:19</time><span class="node ok"></span><span><b>Resolved</b>: payment success back to baseline</span></li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Post-incident actions</h3>
+      <div class="table-wrap"><table>
+        <tr><th>Type</th><th>Action</th></tr>
+        <tr><td>Prevent</td><td>Validate timeout values in config review; include vendor latency in load tests</td></tr>
+        <tr><td>Detect</td><td>Automated canary analysis between rollout stages</td></tr>
+        <tr><td>Mitigate</td><td>Timeout raised to 5 s, with retry and backoff</td></tr>
+      </table></div>
+      <p style="margin:14px 0 0;color:var(--ink-2)">Rollout resumed on <b style="color:var(--ink)">17 June</b> and reached <b style="color:var(--ink)">100% on 22 June</b> with no further incidents.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section id="lessons">
+  <div class="eyebrow">Week 26 · Close-out</div>
+  <h2>Lessons learned</h2>
+  <div class="table-wrap lessons"><table>
+    <tr><th>What worked</th><th>What I'd change</th></tr>
+    <tr><td><b>Contract-first integration</b> recovered about 2 weeks after the vendor sandbox failed</td><td>Put <b>sandbox SLAs in vendor contracts</b> from the start, not at renewal</td></tr>
+    <tr><td>The <b>ORR</b> added the alert that detected the incident in 3 minutes</td><td>Make <b>2× peak load testing</b> a default criterion, not an ORR finding</td></tr>
+    <tr><td><b>Phased rollout plus flag rollback</b> limited impact to 25% of traffic for 38 minutes</td><td>Use <b>automated canary analysis</b> from the first stage</td></tr>
+    <tr><td><b>Early escalation with options</b> got a decision within 48 hours</td><td><b>Baseline success metrics earlier.</b> The latency baseline was a PRD gap</td></tr>
+    <tr><td><b>Automated digests and hygiene checks</b> made governance cheaper (3 h → 45 min a week)</td><td></td></tr>
+  </table></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px"><b style="color:var(--ink)">Fictional case study.</b> Example Co., Kestrel Pay, every team and every number are invented to show how the frameworks fit together.</p>
+    <p style="margin:0"><a href="index.html">← Portfolio home</a> · Part of the <a href="https://github.com/AkanshaBB31/TPM_work">TPM_work portfolio</a> ·<a href="https://github.com/AkanshaBB31/TPM_work/blob/main/11-case-study/checkout-modernization-case-study.md">Read as markdown</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---------- theme toggle ----------
+  var root = document.documentElement, btn = document.getElementById('themeBtn');
+  try { var saved = localStorage.getItem('cs-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  btn.addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') ? root.getAttribute('data-theme') === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('cs-theme', next); } catch (e) {}
+  });
+
+  // ---------- phase timeline ----------
+  var phases = [
+    ['initiation', 'Initiation', 1, 2], ['planning', 'Planning', 3, 4], ['execution', 'Execution', 5, 22],
+    ['quality', 'Quality governance', 1, 26], ['release', 'Release', 21, 24], ['incident', 'Incident & rollout', 23, 25],
+    ['lessons', 'Close-out', 26, 26]
+  ];
+  var ph = document.getElementById('phases');
+  phases.forEach(function (p) {
+    var a = document.createElement('a');
+    a.className = 'phase'; a.href = '#' + p[0];
+    var left = ((p[2] - 1) / 26) * 100, width = ((p[3] - p[2] + 1) / 26) * 100;
+    a.innerHTML = '<div class="wk">Weeks ' + (p[2] === p[3] ? p[2] : p[2] + '–' + p[3]) + '</div><div class="nm">' + p[1] +
+      '</div><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="left:' + left + '%;width:' + width + '%"></div></div>';
+    ph.appendChild(a);
+  });
+
+  // ---------- helpers ----------
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function text(parent, x, y, str, attrs) {
+    var t = el('text', Object.assign({ x: x, y: y, fill: 'var(--muted)', 'font-size': 12 }, attrs || {}), parent);
+    t.textContent = str; return t;
+  }
+  // bar with rounded top corners (4px), square at the baseline
+  function barPath(x, y, w, h, r) {
+    r = Math.min(r, w / 2, h);
+    return 'M' + x + ',' + (y + h) + 'V' + (y + r) + 'Q' + x + ',' + y + ' ' + (x + r) + ',' + y +
+      'H' + (x + w - r) + 'Q' + (x + w) + ',' + y + ' ' + (x + w) + ',' + (y + r) + 'V' + (y + h) + 'Z';
+  }
+  function tooltip(container) {
+    var t = document.createElement('div'); t.className = 'tip'; t.setAttribute('role', 'status');
+    container.appendChild(t);
+    return {
+      show: function (html, x, y) {
+        t.innerHTML = html; t.style.opacity = 1;
+        var cw = container.clientWidth, tw = t.offsetWidth;
+        var left = Math.max(0, Math.min(cw - tw, x - tw / 2));
+        t.style.left = left + 'px'; t.style.top = Math.max(0, y - t.offsetHeight - 10) + 'px';
+      },
+      hide: function () { t.style.opacity = 0; }
+    };
+  }
+  function fillTable(id, head, rows) {
+    var tb = document.getElementById(id);
+    tb.innerHTML = '<tr>' + head.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr>' +
+      rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td' + (i ? ' class="num"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; }).join('');
+  }
+
+  // ---------- velocity: grouped bars ----------
+  var sprints = [
+    ['S1', 34, 28, 'Ramp-up'], ['S2', 36, 32, ''], ['S3', 38, 35, ''], ['S4', 38, 26, 'Vendor sandbox down 6 days'],
+    ['S5', 36, 33, 'Contract stub in place'], ['S6', 38, 36, ''], ['S7', 40, 37, ''], ['S8', 38, 36, ''], ['S9', 32, 31, 'Hardening sprint']
+  ];
+  (function () {
+    var box = document.getElementById('velocityChart');
+    var W = 640, H = 260, m = { t: 24, r: 8, b: 28, l: 32 }, iw = W - m.l - m.r, ih = H - m.t - m.b, max = 40;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Grouped bar chart of committed and completed story points for sprints 1 to 9' }, box);
+    var y = function (v) { return m.t + ih - (v / max) * ih; };
+    [0, 10, 20, 30, 40].forEach(function (v) {
+      el('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: v ? 'var(--grid)' : 'var(--axis)', 'stroke-width': 1 }, svg);
+      text(svg, m.l - 6, y(v) + 4, v, { 'text-anchor': 'end', 'font-variant-numeric': 'tabular-nums' });
+    });
+    var band = iw / sprints.length, bw = Math.min(22, (band - 14) / 2), gap = 2;
+    var tip = tooltip(box);
+    sprints.forEach(function (s, i) {
+      var cx = m.l + band * i + band / 2;
+      var x1 = cx - bw - gap / 2, x2 = cx + gap / 2;
+      el('path', { d: barPath(x1, y(s[1]), bw, y(0) - y(s[1]), 4), fill: 'var(--series-1)' }, svg);
+      el('path', { d: barPath(x2, y(s[2]), bw, y(0) - y(s[2]), 4), fill: 'var(--series-2)' }, svg);
+      text(svg, cx, H - 8, s[0], { 'text-anchor': 'middle', fill: s[0] === 'S4' ? 'var(--ink)' : 'var(--muted)', 'font-weight': s[0] === 'S4' ? 600 : 400 });
+      var hit = el('rect', { x: m.l + band * i, y: m.t, width: band, height: ih, fill: 'transparent', style: 'cursor:default' }, svg);
+      var show = function () {
+        var r = box.getBoundingClientRect(), sv = svg.getBoundingClientRect(), k = sv.width / W;
+        var sd = Math.round(s[2] / s[1] * 100);
+        tip.show('<b>Sprint ' + s[0].slice(1) + '</b><br>Committed ' + s[1] + ' pts<br>Completed ' + s[2] + ' pts<br>Say/Do ' + sd + '%' + (s[3] ? '<br><span style="color:var(--muted)">' + s[3] + '</span>' : ''),
+          cx * k + (sv.left - r.left), y(s[1]) * k + (sv.top - r.top));
+        hit.setAttribute('fill', 'var(--grid)'); hit.setAttribute('fill-opacity', '0.35');
+      };
+      var hide = function () { tip.hide(); hit.setAttribute('fill', 'transparent'); };
+      hit.addEventListener('mouseenter', show); hit.addEventListener('mouseleave', hide);
+      hit.addEventListener('touchstart', show, { passive: true });
+      hit.parentNode.insertBefore(hit, hit.parentNode.firstChild.nextSibling); // keep hover wash behind bars
+    });
+    // annotation for the S4 dip
+    var s4x = m.l + band * 3 + band / 2;
+    text(svg, s4x, y(38) - 8, '68% say/do', { 'text-anchor': 'middle', fill: 'var(--ink-2)', 'font-size': 11.5, 'font-weight': 600 });
+    fillTable('velocityTable', ['Sprint', 'Committed', 'Completed', 'Say/Do'],
+      sprints.map(function (s) { return [s[0], s[1], s[2], Math.round(s[2] / s[1] * 100) + '%']; }));
+  })();
+
+  // ---------- SLO attainment: line ----------
+  var slo = [[2, 78], [4, 79], [6, 81], [8, 84], [10, 83], [12, 86], [14, 88], [16, 90], [18, 91], [20, 92], [22, 91], [24, 93], [26, 93]];
+  (function () {
+    var box = document.getElementById('sloChart');
+    var W = 520, H = 240, m = { t: 16, r: 16, b: 28, l: 36 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var lo = 70, hi = 100;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Line chart of defect SLO attainment rising from 78% at week 2 to 93% at week 26, against a 90% target' }, box);
+    var x = function (w) { return m.l + ((w - 2) / 24) * iw; };
+    var y = function (v) { return m.t + ih - ((v - lo) / (hi - lo)) * ih; };
+    [70, 80, 90, 100].forEach(function (v) {
+      el('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: v === 70 ? 'var(--axis)' : 'var(--grid)', 'stroke-width': 1 }, svg);
+      text(svg, m.l - 6, y(v) + 4, v + '%', { 'text-anchor': 'end' });
+    });
+    [2, 6, 10, 14, 18, 22, 26].forEach(function (w) { text(svg, x(w), H - 8, 'W' + w, { 'text-anchor': 'middle' }); });
+    // target line
+    el('line', { x1: m.l, x2: W - m.r, y1: y(90), y2: y(90), stroke: 'var(--ink-2)', 'stroke-width': 1, 'stroke-dasharray': '4 4' }, svg);
+    text(svg, m.l + 6, y(90) - 6, 'Target 90%', { fill: 'var(--ink-2)', 'font-size': 11.5 });
+    var d = slo.map(function (p, i) { return (i ? 'L' : 'M') + x(p[0]) + ',' + y(p[1]); }).join('');
+    el('path', { d: d, fill: 'none', stroke: 'var(--series-1)', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    // end label
+    var last = slo[slo.length - 1];
+    el('circle', { cx: x(last[0]), cy: y(last[1]), r: 4, fill: 'var(--series-1)', stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+    text(svg, x(last[0]) - 8, y(last[1]) - 10, '93%', { 'text-anchor': 'end', fill: 'var(--ink)', 'font-weight': 600 });
+    // crosshair
+    var cross = el('line', { y1: m.t, y2: m.t + ih, stroke: 'var(--axis)', 'stroke-width': 1, opacity: 0 }, svg);
+    var dot = el('circle', { r: 5, fill: 'var(--series-1)', stroke: 'var(--surface)', 'stroke-width': 2, opacity: 0 }, svg);
+    var tip = tooltip(box);
+    var overlay = el('rect', { x: m.l, y: m.t, width: iw, height: ih, fill: 'transparent' }, svg);
+    function move(clientX) {
+      var sv = svg.getBoundingClientRect(), r = box.getBoundingClientRect(), k = sv.width / W;
+      var vx = (clientX - sv.left) / k, best = slo[0];
+      slo.forEach(function (p) { if (Math.abs(x(p[0]) - vx) < Math.abs(x(best[0]) - vx)) best = p; });
+      cross.setAttribute('x1', x(best[0])); cross.setAttribute('x2', x(best[0])); cross.setAttribute('opacity', 1);
+      dot.setAttribute('cx', x(best[0])); dot.setAttribute('cy', y(best[1])); dot.setAttribute('opacity', 1);
+      tip.show('<b>Week ' + best[0] + '</b><br>Attainment ' + best[1] + '%<br><span style="color:var(--muted)">' + (best[1] >= 90 ? '✓ at or above target' : (90 - best[1]) + ' pts below target') + '</span>',
+        x(best[0]) * k + (sv.left - r.left), y(best[1]) * k + (sv.top - r.top));
+    }
+    overlay.addEventListener('mousemove', function (e) { move(e.clientX); });
+    overlay.addEventListener('touchmove', function (e) { move(e.touches[0].clientX); }, { passive: true });
+    overlay.addEventListener('mouseleave', function () { tip.hide(); cross.setAttribute('opacity', 0); dot.setAttribute('opacity', 0); });
+    fillTable('sloTable', ['Week', 'Attainment'], slo.map(function (p) { return ['W' + p[0], p[1] + '%']; }));
+  })();
+})();
+</script>
+</body>
+</html>

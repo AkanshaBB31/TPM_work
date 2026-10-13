@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Definition of Ready &amp; Backlog Decomposition · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html" aria-current="page"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../03-agile-delivery/index.html">Agile Delivery</a></div>
+    <article><h1 id="definition-of-ready-amp-backlog-decomposition">Definition of Ready &amp; Backlog Decomposition</h1>
+<p><strong>Skill:</strong> Backlog management &amp; requirements engineering · <strong>Competency:</strong> Turning product intent into deliverable work</p>
+<h2 id="1-work-hierarchy">1. Work hierarchy</h2>
+<pre><code>Initiative / Goal       → quarterly business outcome
+  └── Epic / Feature    → shippable capability (1–3 sprints)
+        └── Story       → user-visible slice that fits in one sprint
+              └── Task  → engineering step (hours to 2 days)</code></pre>
+<h2 id="2-requirements-readiness-review">2. Requirements readiness review</h2>
+<p>Run this before a requirements document (PRD) or epic goes to planning. It catches gaps while they're still cheap to fix.</p>
+<div class="table-wrap"><table><thead><tr><th>Area</th><th>Ready when…</th></tr></thead><tbody><tr><td><strong>Traceability</strong></td><td>Links to the business goal it supports; every requirement maps to a goal</td></tr><tr><td><strong>Problem</strong></td><td>States the user or business problem and its evidence, not only a solution</td></tr><tr><td><strong>Goals &amp; non-goals</strong></td><td>Both explicit; non-goals prevent scope creep</td></tr><tr><td><strong>Success metrics</strong></td><td>Measurable, with a baseline and a target</td></tr><tr><td><strong>Users &amp; journeys</strong></td><td>Primary personas and key journeys described</td></tr><tr><td><strong>Functional requirements</strong></td><td>Numbered, testable, prioritised (MoSCoW)</td></tr><tr><td><strong>Non-functional requirements</strong></td><td>Performance, security, accessibility, compliance</td></tr><tr><td><strong>Edge cases</strong></td><td>Error states and boundary conditions described</td></tr><tr><td><strong>Dependencies</strong></td><td>Other teams and systems listed, with dates</td></tr><tr><td><strong>Clarity</strong></td><td>No unresolved "TBD"s on the critical path; open questions have owners and due dates</td></tr><tr><td><strong>Feasibility</strong></td><td>Engineering has reviewed technical risk; rough size known; designs exist for UI changes</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Outcome</th><th>Meaning</th></tr></thead><tbody><tr><td>✅ Ready</td><td>Proceed to backlog breakdown</td></tr><tr><td>🟡 Ready with gaps</td><td>Can start; gaps are tracked as tasks</td></tr><tr><td>🔴 Not ready</td><td>Back to the author with specific feedback</td></tr></tbody></table></div>
+<blockquote><p>An AI assistant can do a first pass against this checklist (see <a href="../08-automation/ai-assisted-pm-workflows.html">AI-assisted PM workflows</a>). A person still makes the readiness call.</p></blockquote>
+<h2 id="3-breakdown-steps">3. Breakdown steps</h2>
+<ol><li><strong>List the user journeys</strong> in the requirement.</li><li><strong>Slice vertically.</strong> Each story is a thin, testable, end-to-end slice, not a single layer.</li><li><strong>Check INVEST:</strong> Independent, Negotiable, Valuable, Estimable, Small, Testable.</li><li><strong>Add non-functional work explicitly:</strong> performance testing, security review, docs, release notes.</li><li><strong>Map dependencies.</strong> Log cross-team ones in the <a href="../02-technical-program-management/cross-team-dependency-management.html">dependency board</a>.</li><li><strong>Sequence the work.</strong> High-risk and high-learning items go first. Use a time-boxed <strong>spike</strong> when uncertainty is too high to estimate.</li></ol>
+<h2 id="4-story-splitting-patterns">4. Story-splitting patterns</h2>
+<div class="table-wrap"><table><thead><tr><th>Pattern</th><th>Example</th></tr></thead><tbody><tr><td>By workflow step</td><td>"Add to cart" before "Checkout"</td></tr><tr><td>By business rule</td><td>Standard shipping first, express later</td></tr><tr><td>By data variation</td><td>One currency first, then multi-currency</td></tr><tr><td>Happy path first</td><td>Success flow, then error handling</td></tr><tr><td>By interface / platform</td><td>API first, then web, then mobile</td></tr></tbody></table></div>
+<h2 id="5-story-level-definition-of-ready">5. Story-level Definition of Ready</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Story in "As a / I want / so that" form, or a clear job statement</li><li><span class="box" aria-hidden="true">☐</span>Acceptance criteria in Given/When/Then form</li><li><span class="box" aria-hidden="true">☐</span>Estimated by the team; no bigger than half a sprint</li><li><span class="box" aria-hidden="true">☐</span>Dependencies identified and unblocked, or explicitly accepted</li><li><span class="box" aria-hidden="true">☐</span>UX/design attached where relevant</li></ul>
+<h2 id="6-team-definition-of-done">6. Team Definition of Done</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Code reviewed and merged; automated tests pass</li><li><span class="box" aria-hidden="true">☐</span>Acceptance criteria verified</li><li><span class="box" aria-hidden="true">☐</span>Documentation and release-notes entry updated</li><li><span class="box" aria-hidden="true">☐</span>Deployed to the agreed environment</li><li><span class="box" aria-hidden="true">☐</span>No open critical or high defects against the story</li></ul>
+<h2 id="7-worked-example-fictional">7. Worked example (fictional)</h2>
+<p><strong>Epic:</strong> Self-service password reset</p>
+<div class="table-wrap"><table><thead><tr><th>Story</th><th>Acceptance criteria (abridged)</th></tr></thead><tbody><tr><td>Request reset link</td><td>Given a registered email, when I submit, then I receive a link within 2 minutes</td></tr><tr><td>Set new password</td><td>Given a valid link, when I set a compliant password, then I can log in</td></tr><tr><td>Expired link</td><td>Given a link past its expiry, then I see a clear message and can request a new one</td></tr><tr><td>Audit trail</td><td>Every reset attempt is logged with a timestamp and its outcome</td></tr></tbody></table></div>
+<p><strong>Traceability check:</strong> every requirement maps to at least one story, and every story maps back to the epic goal.</p></article>
+    <div class="prevnext"><span></span><a href="sprint-planning-playbook.html">sprint planning playbook →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/03-agile-delivery/definition-of-ready-and-backlog-decomposition.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-work-hierarchy">1. Work hierarchy</a><a href="#2-requirements-readiness-review">2. Requirements readiness review</a><a href="#3-breakdown-steps">3. Breakdown steps</a><a href="#4-story-splitting-patterns">4. Story-splitting patterns</a><a href="#5-story-level-definition-of-ready">5. Story-level Definition of Ready</a><a href="#6-team-definition-of-done">6. Team Definition of Done</a><a href="#7-worked-example-fictional">7. Worked example (fictional)</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

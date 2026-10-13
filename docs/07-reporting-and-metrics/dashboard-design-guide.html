@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delivery Dashboard Design Guide · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html" aria-current="page"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../07-reporting-and-metrics/index.html">Reporting &amp; Metrics</a></div>
+    <article><h1 id="delivery-dashboard-design-guide">Delivery Dashboard Design Guide</h1>
+<p><strong>Skill:</strong> Data visualisation &amp; operational reporting · <strong>Competency:</strong> Building self-serve, decision-oriented program-health and defect-trend dashboards</p>
+<h2 id="1-start-from-the-decision-not-the-data">1. Start from the decision, not the data</h2>
+<p>For each panel, write down <em>who</em> looks at it, <em>how often</em> and <em>which decision</em> it informs. <strong>If no decision depends on a panel, remove it.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Audience</th><th>Question</th><th>Panel</th></tr></thead><tbody><tr><td>Executive</td><td>Will we deliver what we promised this quarter?</td><td>Commitment scorecard</td></tr><tr><td>Executive</td><td>Is quality getting better or worse?</td><td>Defect inflow vs. outflow trend; KPI tiles</td></tr><tr><td>Release manager</td><td>Is this release ready? Did the last one introduce risk?</td><td>Readiness summary; defects by found-in version</td></tr><tr><td>Delivery lead</td><td>What needs my attention today?</td><td>Exceptions: blocked, at risk, SLO warnings</td></tr><tr><td>Engineering manager</td><td>Where is work or pain concentrated?</td><td>Breakdown by component × priority; workload by owner</td></tr><tr><td>Support lead</td><td>Are customer commitments being met?</td><td>SLO attainment by customer segment</td></tr></tbody></table></div>
+<h2 id="2-layout-hierarchy">2. Layout hierarchy</h2>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│ Title · scope selector · &quot;data as of&quot; timestamp                │
+├──────────────────────────────────────────────────────────────┤
+│ KPI tiles (4–6 max): Open P1/P2 │ SLO attainment │ Ready % │ ↑↓ │
+├───────────────────────────────┬──────────────────────────────┤
+│ Breakdown: priority × area     │ Exceptions list (actionable) │
+├───────────────────────────────┴──────────────────────────────┤
+│ Trends: inflow vs. outflow (12 weeks) · age heatmap            │
+├──────────────────────────────────────────────────────────────┤
+│ Detail table: filter, sort, search, export; rows link to source│
+└──────────────────────────────────────────────────────────────┘</code></pre>
+<p><strong>Top:</strong> what someone reads in 10 seconds. <strong>Middle:</strong> what needs action. <strong>Bottom:</strong> detail for anyone who wants to dig in. For larger programs, use a <strong>home page plus detail pages</strong> (one per release or team).</p>
+<h2 id="3-every-number-is-a-doorway">3. Every number is a doorway</h2>
+<ul><li>Clicking any KPI tile or chart segment opens <strong>the items behind it</strong>, in a filtered table or a side panel.</li><li>Make clickability visible <em>before</em> the click: a hover state, a pointer cursor, a "→" hint.</li><li>Show active filters in a filter bar with a one-click "clear".</li><li>Never make a static number look clickable, or a clickable one look static.</li></ul>
+<h2 id="4-trust-signals">4. Trust signals</h2>
+<ul><li>One <strong>"data as of"</strong> timestamp in a fixed place.</li><li>Metric definitions next to the metric, behind an ⓘ tooltip.</li><li><strong>Explain every flag:</strong> each red cell shows <em>why</em> it's red.</li><li>Show data-hygiene exceptions (e.g. <em>done without a release date</em>) instead of quietly dropping them.</li><li>Every row links back to the source tracker item.</li></ul>
+<h2 id="5-generic-data-model">5. Generic data model</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Purpose</th></tr></thead><tbody><tr><td>id, title</td><td>Identification (internal editions only)</td></tr><tr><td>type</td><td>Incident / defect / request / story</td></tr><tr><td>priority, severity</td><td>Segmentation</td></tr><tr><td>component / product area</td><td>Concentration analysis</td></tr><tr><td>status, status category</td><td>Open vs. closed</td></tr><tr><td>created, resolved</td><td>Ageing, inflow/outflow, SLO</td></tr><tr><td>found-in version, environment</td><td>Release quality, escape rate</td></tr><tr><td>owner</td><td>Workload, routing</td></tr></tbody></table></div>
+<h2 id="6-chart-rules">6. Chart rules</h2>
+<ul><li>One message per chart. <strong>The title states the takeaway</strong> ("P2 backlog grew 20% in Q3").</li><li>Use a consistent colour per priority across all charts.</li><li>Never rely on colour alone: pair it with text or icons, and check contrast in light and dark themes.</li><li>Prefer bars to pies with more than 4 slices.</li><li>Default to the current period. Never average separate planning periods without labelling it.</li><li>The layout must work at phone width.</li></ul>
+<h2 id="7-optional-composite-health-score">7. Optional composite health score</h2>
+<p>A score helps rank areas, but always <strong>show its components next to it</strong>.</p>
+<pre><code>health = 100
+       − 15 × open P1 count
+       −  5 × SLO breaches
+       −  2 × SLO warnings
+       − 10 × (inflow &gt; outflow for 3 consecutive weeks)</code></pre>
+<p><em>The weights are illustrative. Calibrate them against your own history.</em></p>
+<h2 id="8-pipeline-amp-maintenance">8. Pipeline &amp; maintenance</h2>
+<pre><code>Saved tracker queries ─► Fetch (API) ─► Evaluate rules ─► Render (static page) ─► Publish
+         ▲                                    ▲
+     config file                    thresholds in config</code></pre>
+<ul><li>Keep extraction, transformation and presentation as <strong>separate steps</strong>.</li><li>Keep queries and thresholds in <strong>version-controlled config</strong>, never hard-coded.</li><li>For small audiences with stable questions, a static page rebuilt from a data file is often faster and cheaper than heavy BI tooling.</li><li>Use scheduled refreshes for the baseline and on-demand refreshes for live reviews.</li><li>Put the dashboard behind the same access controls as the source data.</li><li>Publishing is part of the Definition of Done. A change that isn't live hasn't shipped.</li></ul>
+<h2 id="9-example-insight-narrative-fictional">9. Example insight narrative (fictional)</h2>
+<blockquote><p>Open P1/P2 defects fell 30% month on month, but <strong>one product area accounts for 45% of new P3s</strong>, concentrated in the two weeks after the last release. <em>Recommendation:</em> add a targeted regression pack for that area before the next release.</p></blockquote></article>
+    <div class="prevnext"><a href="delivery-metrics-catalog.html">← delivery metrics catalog</a><a href="progress-reporting-templates.html">progress reporting templates →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/07-reporting-and-metrics/dashboard-design-guide.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-start-from-the-decision-not-the-data">1. Start from the decision, not the data</a><a href="#2-layout-hierarchy">2. Layout hierarchy</a><a href="#3-every-number-is-a-doorway">3. Every number is a doorway</a><a href="#4-trust-signals">4. Trust signals</a><a href="#5-generic-data-model">5. Generic data model</a><a href="#6-chart-rules">6. Chart rules</a><a href="#7-optional-composite-health-score">7. Optional composite health score</a><a href="#8-pipeline-amp-maintenance">8. Pipeline &amp; maintenance</a><a href="#9-example-insight-narrative-fictional">9. Example insight narrative (fictional)</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

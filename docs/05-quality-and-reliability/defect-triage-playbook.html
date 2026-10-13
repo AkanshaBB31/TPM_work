@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defect Triage Playbook · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html" aria-current="page"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../05-quality-and-reliability/index.html">Quality &amp; Reliability</a></div>
+    <article><h1 id="defect-triage-playbook">Defect Triage Playbook</h1>
+<p><strong>Skill:</strong> Quality management · <strong>Competency:</strong> Prioritisation and cross-functional facilitation</p>
+<h2 id="roles">Roles</h2>
+<div class="table-wrap"><table><thead><tr><th>Role</th><th>Responsibility</th></tr></thead><tbody><tr><td>Triage lead (rotating)</td><td>Runs the session, keeps the timeboxes, makes the final priority call</td></tr><tr><td>Product</td><td>Confirms business impact</td></tr><tr><td>Engineering</td><td>Assesses severity and effort; assigns an owner</td></tr><tr><td>QA</td><td>Confirms reproducibility; identifies test gaps</td></tr><tr><td>Support</td><td>Brings customer impact and frequency</td></tr></tbody></table></div>
+<h2 id="cadence">Cadence</h2>
+<div class="table-wrap"><table><thead><tr><th>Session</th><th>Length</th><th>Scope</th></tr></thead><tbody><tr><td>Daily</td><td>15 min</td><td>New defects since the last triage (P1s are triaged immediately, outside the cadence)</td></tr><tr><td>Twice weekly</td><td>30 min</td><td>P3/P4 backlog</td></tr><tr><td>Weekly ageing review</td><td>30 min</td><td>WARNING items and anything that hasn't moved in 7 days: still valid? Still the right priority?</td></tr></tbody></table></div>
+<h2 id="flow">Flow</h2>
+<pre><code>New defect
+  ├─ Duplicate? ───────────────► Link &amp; close
+  ├─ Can&#x27;t reproduce / missing info? ─► Request info (SLO clock paused)
+  ├─ Working as designed? ─────► Convert to an enhancement, or close with an explanation
+  ▼
+Impact × urgency → Priority → Owner → Target date from the SLO → Tell the reporter</code></pre>
+<h2 id="impact-urgency-matrix">Impact × urgency matrix</h2>
+<div class="table-wrap"><table><thead><tr><th></th><th>Urgency high</th><th>Urgency medium</th><th>Urgency low</th></tr></thead><tbody><tr><td><strong>Impact: widespread</strong></td><td>P1</td><td>P2</td><td>P3</td></tr><tr><td><strong>Impact: many users</strong></td><td>P2</td><td>P2</td><td>P3</td></tr><tr><td><strong>Impact: few users</strong></td><td>P3</td><td>P3</td><td>P4</td></tr></tbody></table></div>
+<p>Targets come from the <a href="defect-slo-framework.html">defect SLO framework</a>.</p>
+<h2 id="minimum-good-bug-report">Minimum good bug report</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Steps to reproduce; expected vs. actual result</li><li><span class="box" aria-hidden="true">☐</span>Environment and version</li><li><span class="box" aria-hidden="true">☐</span>Scope of impact (how many users or accounts, and which segment)</li><li><span class="box" aria-hidden="true">☐</span>Evidence: logs, recordings, with <strong>sensitive data removed</strong></li></ul>
+<h2 id="required-fields-before-leaving-triage">Required fields before leaving triage</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Priority · [ ] Component · [ ] Environment · [ ] Owner · [ ] Target date</li></ul>
+<h2 id="quality-checks-for-the-triage-itself">Quality checks for the triage itself</h2>
+<ul><li>Is priority based on customer or business impact, not on who raised it?</li><li>Does every triaged item have an owner and a date?</li><li>Are there <strong>clusters</strong> (same component, same release) that call for a root-cause review?</li></ul>
+<h2 id="outputs">Outputs</h2>
+<ul><li>An updated tracker, which is the single source of truth</li><li>Escalations for any new P1 (see the <a href="../09-leadership/escalation-playbook.html">escalation playbook</a>)</li><li>Clusters flagged for problem management</li></ul></article>
+    <div class="prevnext"><a href="defect-slo-framework.html">← defect slo framework</a><a href="post-incident-review-template.html">post incident review template →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/05-quality-and-reliability/defect-triage-playbook.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#roles">Roles</a><a href="#cadence">Cadence</a><a href="#flow">Flow</a><a href="#impact-urgency-matrix">Impact × urgency matrix</a><a href="#minimum-good-bug-report">Minimum good bug report</a><a href="#required-fields-before-leaving-triage">Required fields before leaving triage</a><a href="#quality-checks-for-the-triage-itself">Quality checks for the triage itself</a><a href="#outputs">Outputs</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operational Readiness Review (ORR) · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html" aria-current="page"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../02-technical-program-management/index.html">Technical Program Management</a></div>
+    <article><h1 id="operational-readiness-review-orr">Operational Readiness Review (ORR)</h1>
+<p><strong>Skill:</strong> Technical program management · <strong>Competency:</strong> Observability governance and non-functional readiness<br><strong>Standards:</strong> Google SRE production readiness, ITIL service transition</p>
+<p>Functional tests show that a feature <em>works</em>. An ORR shows that it can be <strong>operated</strong>: monitored, scaled, secured, supported and recovered. Run it before the first production launch of a new service or major capability, ideally 1–2 weeks before go/no-go.</p>
+<h2 id="1-observability">1. Observability</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Service-level indicators defined (availability, latency, error rate) with SLO targets</li><li><span class="box" aria-hidden="true">☐</span>Dashboards exist for the key user journeys, not just infrastructure</li><li><span class="box" aria-hidden="true">☐</span>Alerts are tied to SLOs and symptoms, not only to causes</li><li><span class="box" aria-hidden="true">☐</span>Every alert links to a runbook</li><li><span class="box" aria-hidden="true">☐</span>Logs are structured, searchable, and free of secrets and personal data</li><li><span class="box" aria-hidden="true">☐</span>Distributed tracing covers cross-service calls</li><li><span class="box" aria-hidden="true">☐</span>Synthetic checks cover critical journeys</li></ul>
+<h2 id="2-capacity-amp-performance">2. Capacity &amp; performance</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Expected peak load estimated, with headroom (e.g. 2× peak)</li><li><span class="box" aria-hidden="true">☐</span>Load test run against the release candidate; results recorded</li><li><span class="box" aria-hidden="true">☐</span>Autoscaling limits and quotas reviewed</li><li><span class="box" aria-hidden="true">☐</span>Downstream dependencies can absorb the new load</li></ul>
+<h2 id="3-resilience">3. Resilience</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Failure modes documented (dependency down, slow, returning errors)</li><li><span class="box" aria-hidden="true">☐</span>Timeouts, retries with backoff, and circuit breakers configured</li><li><span class="box" aria-hidden="true">☐</span>Graceful degradation defined for non-critical features</li><li><span class="box" aria-hidden="true">☐</span>Backup and restore tested; RPO/RTO documented</li><li><span class="box" aria-hidden="true">☐</span><a href="../04-release-management/rollback-planning-template.html">Rollback plan</a> tested</li></ul>
+<h2 id="4-security-amp-compliance">4. Security &amp; compliance</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>Threat model reviewed</li><li><span class="box" aria-hidden="true">☐</span>Authentication and authorisation follow least privilege</li><li><span class="box" aria-hidden="true">☐</span>Secrets in a secret manager; none in code or config</li><li><span class="box" aria-hidden="true">☐</span>Dependency and container scans clean, or exceptions approved</li><li><span class="box" aria-hidden="true">☐</span>Data classification and retention rules applied</li></ul>
+<h2 id="5-support-readiness">5. Support readiness</h2>
+<ul class="tasks"><li><span class="box" aria-hidden="true">☐</span>On-call rota and escalation path defined</li><li><span class="box" aria-hidden="true">☐</span>Runbooks for the top failure scenarios</li><li><span class="box" aria-hidden="true">☐</span>Support team trained; known issues documented</li><li><span class="box" aria-hidden="true">☐</span>The <a href="../05-quality-and-reliability/incident-communication-playbook.html">incident communication plan</a> covers this service</li></ul>
+<h2 id="6-outcome">6. Outcome</h2>
+<div class="table-wrap"><table><thead><tr><th>Area</th><th>Owner</th><th>Status</th><th>Gaps / actions</th></tr></thead><tbody><tr><td>Observability</td><td></td><td>🟢 / 🟡 / 🔴</td><td></td></tr><tr><td>Capacity</td><td></td><td></td><td></td></tr><tr><td>Resilience</td><td></td><td></td><td></td></tr><tr><td>Security</td><td></td><td></td><td></td></tr><tr><td>Support</td><td></td><td></td><td></td></tr></tbody></table></div>
+<p><strong>Rule:</strong> any 🔴 blocks launch unless the accountable owner records an exception with an expiry date. ORR gaps feed the <a href="../04-release-management/release-readiness-checklist.html">release readiness checklist</a>.</p>
+<h2 id="7-tpms-role">7. TPM's role</h2>
+<p>The TPM doesn't answer these questions. The TPM makes sure <strong>the right owner answers each one</strong>, with evidence, before the deadline, and that the gaps are tracked to closure.</p></article>
+    <div class="prevnext"><a href="cross-team-dependency-management.html">← cross team dependency management</a><span></span></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/02-technical-program-management/operational-readiness-review.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-observability">1. Observability</a><a href="#2-capacity-amp-performance">2. Capacity &amp; performance</a><a href="#3-resilience">3. Resilience</a><a href="#4-security-amp-compliance">4. Security &amp; compliance</a><a href="#5-support-readiness">5. Support readiness</a><a href="#6-outcome">6. Outcome</a><a href="#7-tpms-role">7. TPM&#x27;s role</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

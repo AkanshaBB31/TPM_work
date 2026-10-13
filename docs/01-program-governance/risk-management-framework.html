@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risk Management Framework · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html" aria-current="page"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../01-program-governance/index.html">Program Governance</a></div>
+    <article><h1 id="risk-management-framework">Risk Management Framework</h1>
+<p><strong>Skill:</strong> Program governance · <strong>Competency:</strong> Proactive risk identification and response</p>
+<h2 id="1-lifecycle">1. Lifecycle</h2>
+<pre><code>Identify → Assess → Plan response → Monitor → Close, or convert to an issue</code></pre>
+<h2 id="2-identification-techniques">2. Identification techniques</h2>
+<ul><li><strong>Pre-mortem:</strong> "It's launch day and we failed. Why?" Everyone writes silently first, then the reasons are shared.</li><li><strong>Assumption audit:</strong> list every assumption in the plan and ask <em>what if this is false?</em></li><li><strong>Dependency walk:</strong> trace every external input to an owner and a committed date.</li><li><strong>Historical review:</strong> read the retrospectives and incident reviews from similar efforts.</li></ul>
+<h2 id="3-scoring-probability-impact">3. Scoring: Probability × Impact</h2>
+<div class="table-wrap"><table><thead><tr><th>P \ I</th><th>1 Minimal</th><th>2 Minor</th><th>3 Moderate</th><th>4 Major</th><th>5 Severe</th></tr></thead><tbody><tr><td><strong>5 Almost certain</strong></td><td>5</td><td>10</td><td>15</td><td>20</td><td>25</td></tr><tr><td><strong>4 Likely</strong></td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td></tr><tr><td><strong>3 Possible</strong></td><td>3</td><td>6</td><td>9</td><td>12</td><td>15</td></tr><tr><td><strong>2 Unlikely</strong></td><td>2</td><td>4</td><td>6</td><td>8</td><td>10</td></tr><tr><td><strong>1 Rare</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Score</th><th>Rating</th><th>Expected response</th></tr></thead><tbody><tr><td>15–25</td><td>🔴 High</td><td>Response plan within 48h; visible in the executive report and at steering</td></tr><tr><td>8–14</td><td>🟠 Medium</td><td>Response plan within 1 week; reviewed weekly</td></tr><tr><td>1–7</td><td>🟢 Low</td><td>Owner monitors; reviewed monthly</td></tr></tbody></table></div>
+<p>Score impact as the <strong>highest</strong> of: schedule slip, scope loss, quality or compliance exposure, cost variance, or reputational damage.</p>
+<h2 id="4-response-strategies">4. Response strategies</h2>
+<div class="table-wrap"><table><thead><tr><th>Strategy</th><th>When to use it</th></tr></thead><tbody><tr><td><strong>Avoid</strong></td><td>Change the plan so the risk can't occur</td></tr><tr><td><strong>Mitigate</strong></td><td>Reduce its probability or impact</td></tr><tr><td><strong>Transfer</strong></td><td>Move the impact to a third party (contract, insurance, vendor SLA)</td></tr><tr><td><strong>Accept</strong></td><td>Low score, or a cost that isn't justified. Set a contingency.</td></tr><tr><td><strong>Escalate</strong></td><td>The response is outside the team's authority (see the <a href="../09-leadership/escalation-playbook.html">escalation playbook</a>)</td></tr></tbody></table></div>
+<h2 id="5-leading-indicators">5. Leading indicators</h2>
+<ul><li>Throughput or velocity falling for 2 or more sprints in a row</li><li>A growing number of blocked items</li><li>Defect inflow exceeding outflow for 3 or more weeks</li><li>Repeated slips on dependency dates</li><li>Unplanned work above roughly 20% of capacity</li></ul>
+<h2 id="6-reporting-format">6. Reporting format</h2>
+<blockquote><p><strong>[🔴 R-07] Upstream release slip:</strong> P4 × I4 = 16<br><em>Impact:</em> UAT start moves 1 week if this isn't resolved by &lt;date&gt;.<br><em>Response:</em> Mitigate. Build against a contract stub and integration-test once the API is available.<br><em>Ask:</em> None yet. Escalate on &lt;date&gt; if there's still no committed date.</p></blockquote></article>
+    <div class="prevnext"><a href="raid-log-template.html">← raid log template</a><a href="decision-log-template.html">decision log template →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/risk-management-framework.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#1-lifecycle">1. Lifecycle</a><a href="#2-identification-techniques">2. Identification techniques</a><a href="#3-scoring-probability-impact">3. Scoring: Probability × Impact</a><a href="#4-response-strategies">4. Response strategies</a><a href="#5-leading-indicators">5. Leading indicators</a><a href="#6-reporting-format">6. Reporting format</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

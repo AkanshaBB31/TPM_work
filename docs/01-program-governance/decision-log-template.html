@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision Log Template · TPM Portfolio</title>
+<meta name="description" content="Program &amp; delivery management portfolio: frameworks, templates and playbooks.">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('cs-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">TPM_work</a>
+  <a class="toplink" href="../case-study.html">Case study</a>
+  <a class="toplink" href="https://github.com/AkanshaBB31/TPM_work">GitHub ↗</a>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+</div></div>
+<div class="wrap layout">
+  <nav class="sidenav" aria-label="Skill areas"><div class="toc-h">Skill areas</div><a href="../01-program-governance/index.html" aria-current="page"><span class="n">01</span>Program Governance</a><a href="../02-technical-program-management/index.html"><span class="n">02</span>Technical Program Management</a><a href="../03-agile-delivery/index.html"><span class="n">03</span>Agile Delivery</a><a href="../04-release-management/index.html"><span class="n">04</span>Release Management</a><a href="../05-quality-and-reliability/index.html"><span class="n">05</span>Quality &amp; Reliability</a><a href="../06-stakeholder-management/index.html"><span class="n">06</span>Stakeholder Management</a><a href="../07-reporting-and-metrics/index.html"><span class="n">07</span>Reporting &amp; Metrics</a><a href="../08-automation/index.html"><span class="n">08</span>Automation</a><a href="../09-leadership/index.html"><span class="n">09</span>Leadership</a><a href="../10-interview-prep/index.html"><span class="n">10</span>Interview Prep</a><a href="../11-case-study/index.html"><span class="n">11</span>Case Study</a></nav>
+  <main class="doc">
+    <div class="crumbs"><a href="../index.html">Home</a> / <a href="../01-program-governance/index.html">Program Governance</a></div>
+    <article><h1 id="decision-log-template">Decision Log Template</h1>
+<p><strong>Skill:</strong> Decision governance · <strong>Practice:</strong> Adapted from Architecture Decision Records (ADRs) for delivery, scope and technical choices</p>
+<p>Decisions get lost in meetings and chat threads. A decision log records <strong>what</strong> was decided, <strong>why</strong>, <strong>who</strong> decided it and <strong>what was rejected</strong>, so the same questions don't keep coming back.</p>
+<h2 id="when-to-log">When to log</h2>
+<p>Log a decision if it:</p>
+<ul><li>changes scope, dates, cost, architecture or customer commitments</li><li>is hard to reverse</li><li>chooses between options that were all seriously considered</li><li>involved disagreement (record the dissent as well as the outcome)</li><li>would confuse someone joining in three months</li></ul>
+<h2 id="index">Index</h2>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Date</th><th>Decision</th><th>Decider</th><th>Status</th></tr></thead><tbody><tr><td>DEC-001</td><td>2026-02-12</td><td>Defer offline mode to the next release</td><td>Product director</td><td>Accepted</td></tr><tr><td>DEC-002</td><td>2026-03-04</td><td>Adopt a fortnightly release train</td><td>Delivery lead</td><td>Superseded by DEC-009</td></tr></tbody></table></div>
+<h2 id="record-template">Record template</h2>
+<pre><code class="lang-markdown">### DEC-&lt;n&gt;: &lt;short title&gt;
+
+- **Date:** YYYY-MM-DD
+- **Status:** Proposed | Accepted | Rejected | Superseded by DEC-&lt;n&gt;
+- **Decide (one accountable person):** &lt;role&gt;
+- **Recommend / Agree / Input / Perform:** &lt;roles&gt;   ← RAPID roles
+- **Informed:** &lt;roles / channels&gt;
+
+**Context:** What forced a decision? Which constraints apply?
+
+**Options considered**
+| Option | Pros | Cons |
+|---|---|---|
+| A | | |
+| B | | |
+| Do nothing | | |
+
+**Decision:** The chosen option, in one sentence, and the deciding factor.
+
+**Consequences:** What gets easier, what gets harder, and which new risks to log in the RAID log.
+
+**Revisit by:** &lt;date or trigger&gt;</code></pre>
+<h2 id="worked-example-fictional">Worked example (fictional)</h2>
+<p><strong>DEC-001: Defer offline mode to the next release.</strong> Offline sync testing found data-conflict edge cases, and fixing them would delay launch by 3 weeks. The options were (1) delay the release and keep the scope, or (2) launch on time without offline mode. <strong>Option 2 was chosen.</strong> The launch is tied to an external event that can't move, and offline mode affects fewer than 10% of target users. <em>Consequences:</em> Support publishes a known-limitation FAQ, and offline mode becomes the first epic of the next release.</p>
+<h2 id="rules">Rules</h2>
+<ol><li>One decision per record.</li><li>Accepted records are never edited. Supersede them with a new record.</li><li>Link each decision from the RAID items and backlog items it affects.</li></ol></article>
+    <div class="prevnext"><a href="risk-management-framework.html">← risk management framework</a><a href="quarterly-commitment-tracking.html">quarterly commitment tracking →</a></div>
+    <div class="docfoot"><a class="src" href="https://github.com/AkanshaBB31/TPM_work/blob/main/01-program-governance/decision-log-template.md">View source on GitHub ↗</a><span>All examples are fictional · <a href="../COMPLIANCE.html">Compliance</a></span></div>
+  </main>
+  <aside class="toc"><div class="toc-h">On this page</div><a href="#when-to-log">When to log</a><a href="#index">Index</a><a href="#record-template">Record template</a><a href="#worked-example-fictional">Worked example (fictional)</a><a href="#rules">Rules</a></aside>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

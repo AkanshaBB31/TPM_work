@@ -1,0 +1,12 @@
+id,title,priority,area,created,resolved
+EX-101,Login page timeout on slow networks,P1,Accounts,2026-03-29,
+EX-102,Discount not applied to bundles,P2,Checkout,2026-03-10,2026-03-15
+EX-103,Export CSV has wrong timezone,P3,Reporting,2026-02-20,
+EX-104,Receipt email missing logo,P3,Notifications,2026-03-05,
+EX-105,Refund status not updating,P2,Payments,2026-03-20,
+EX-106,Dashboard chart overlaps legend,P4,Reporting,2026-01-15,
+EX-107,Checkout error for gift cards,P1,Checkout,2026-03-20,2026-03-22
+EX-108,Password reset link expired early,P2,Accounts,2026-03-01,2026-03-20
+EX-109,Search ignores accented characters,P3,Catalog,2026-03-12,
+EX-110,Push notification sent twice,P2,Notifications,2026-03-14,
+EX-111,Saved cart lost after sign-out,P1,Checkout,2026-03-24,
